@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 · 120일 학습 계획</title>
+<style>
+:root {
+  --bg: #0f172a;
+  --bg2: #1e293b;
+  --bg3: #334155;
+  --teal: #14b8a6;
+  --teal-light: #ccfbf1;
+  --teal-dark: #0f766e;
+  --blue: #3b82f6;
+  --blue-light: #dbeafe;
+  --amber: #f59e0b;
+  --amber-light: #fef3c7;
+  --red: #ef4444;
+  --red-light: #fee2e2;
+  --green: #22c55e;
+  --green-light: #dcfce7;
+  --gray: #94a3b8;
+  --gray-light: #f1f5f9;
+  --white: #ffffff;
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --border: #e2e8f0;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; }
+
+/* Layout */
+.shell { display: flex; min-height: 100vh; }
+.sidebar { width: 220px; background: var(--bg2); padding: 28px 0; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; border-right: 1px solid rgba(255,255,255,.06); z-index: 10; }
+.main { margin-left: 220px; min-height: 100vh; background: var(--gray-light); }
+
+/* Sidebar */
+.logo { padding: 0 20px 24px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 16px; }
+.logo-title { font-size: 15px; font-weight: 700; color: var(--teal); letter-spacing: -.3px; }
+.logo-sub { font-size: 11px; color: var(--gray); margin-top: 3px; }
+.nav-label { font-size: 10px; font-weight: 600; color: var(--gray); letter-spacing: .08em; text-transform: uppercase; padding: 8px 20px 6px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; cursor: pointer; font-size: 13px; color: var(--gray); transition: all .15s; border-left: 3px solid transparent; }
+.nav-item:hover { color: var(--white); background: rgba(255,255,255,.05); }
+.nav-item.active { color: var(--teal); background: rgba(20,184,166,.1); border-left-color: var(--teal); }
+.nav-icon { font-size: 16px; width: 20px; text-align: center; }
+.sidebar-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.06); font-size: 11px; color: var(--gray); }
+
+/* Page sections */
+.page { display: none; padding: 32px 36px; }
+.page.active { display: block; }
+.page-header { margin-bottom: 28px; }
+.page-title { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -.4px; }
+.page-sub { font-size: 13px; color: var(--text2); margin-top: 5px; }
+
+/* Cards */
+.card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 20px 24px; }
+.card-sm { background: var(--white); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 14px 18px; }
+
+/* Stats row */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.stat-card { background: var(--white); border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--border); }
+.stat-val { font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -.5px; }
+.stat-unit { font-size: 14px; font-weight: 500; }
+.stat-lbl { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+/* Grid */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+/* Section title */
+.sect { font-size: 12px; font-weight: 600; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 12px; margin-top: 24px; }
+
+/* Badge */
+.badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+.badge-red { background: var(--red-light); color: #b91c1c; }
+.badge-teal { background: var(--teal-light); color: var(--teal-dark); }
+.badge-blue { background: var(--blue-light); color: #1d4ed8; }
+.badge-amber { background: var(--amber-light); color: #92400e; }
+.badge-gray { background: #f1f5f9; color: #475569; }
+
+/* Subject order cards */
+.order-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px 20px; margin-bottom: 10px; display: grid; grid-template-columns: 44px 1fr auto; gap: 16px; align-items: center; }
+.order-card.highlight { border-left: 4px solid var(--red); }
+.order-card.highlight2 { border-left: 4px solid var(--teal); }
+.order-card.highlight3 { border-left: 4px solid var(--amber); }
+.order-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+.order-body {}
+.order-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.order-inst { font-size: 12px; color: var(--teal-dark); font-weight: 500; margin-bottom: 3px; }
+.order-desc { font-size: 11px; color: var(--text2); line-height: 1.5; }
+.order-meta { text-align: right; }
+.order-h { font-size: 16px; font-weight: 700; color: var(--text); }
+.order-h-sub { font-size: 11px; color: var(--text3); }
+
+/* Phase timeline */
+.timeline { position: relative; }
+.timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { display: flex; gap: 20px; margin-bottom: 24px; position: relative; }
+.tl-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; z-index: 1; }
+.tl-body { flex: 1; }
+.tl-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.tl-days { font-size: 12px; color: var(--text3); margin-bottom: 10px; }
+.tl-subjects { display: flex; flex-direction: column; gap: 6px; }
+.tl-subj { display: flex; align-items: center; justify-content: space-between; background: var(--gray-light); border-radius: var(--radius-sm); padding: 8px 14px; }
+.tl-subj-name { font-size: 12px; color: var(--text); }
+.tl-subj-right { display: flex; align-items: center; gap: 8px; }
+.tl-subj-h { font-size: 12px; font-weight: 600; color: var(--text); }
+.tl-note { font-size: 11px; color: var(--text3); margin-top: 8px; padding: 8px 12px; background: var(--gray-light); border-radius: var(--radius-sm); line-height: 1.5; }
+
+/* Weekly schedule */
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 16px; }
+.week-day { border-radius: var(--radius-sm); padding: 12px 8px; text-align: center; border: 1px solid var(--border); background: var(--white); }
+.week-day-name { font-size: 11px; font-weight: 600; color: var(--text3); margin-bottom: 6px; }
+.week-day-h { font-size: 18px; font-weight: 700; }
+.week-day-sub { font-size: 10px; margin-top: 3px; }
+.week-day.rest { background: #fef2f2; border-color: #fecaca; }
+.week-day.rest .week-day-h { color: #ef4444; }
+.week-day.rest .week-day-sub { color: #f87171; }
+.week-day.weekday { background: #f0fdf4; border-color: #bbf7d0; }
+.week-day.weekday .week-day-h { color: #16a34a; }
+.week-day.weekday .week-day-sub { color: #4ade80; }
+.week-day.weekend { background: #eff6ff; border-color: #bfdbfe; }
+.week-day.weekend .week-day-h { color: #2563eb; }
+.week-day.weekend .week-day-sub { color: #60a5fa; }
+
+/* Time blocks */
+.time-block-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.time-block { flex: 1; border-radius: var(--radius-sm); padding: 10px 14px; border: 1px solid transparent; }
+.tb-title { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+.tb-desc { font-size: 11px; line-height: 1.4; }
+.time-block.commute { background: #fdf4ff; border-color: #e9d5ff; }
+.time-block.commute .tb-title { color: #7c3aed; }
+.time-block.commute .tb-desc { color: #8b5cf6; }
+.time-block.evening { background: #f0fdf4; border-color: #bbf7d0; }
+.time-block.evening .tb-title { color: #16a34a; }
+.time-block.evening .tb-desc { color: #4ade80; }
+.time-block.weekend-am { background: #eff6ff; border-color: #bfdbfe; }
+.time-block.weekend-am .tb-title { color: #2563eb; }
+.time-block.weekend-am .tb-desc { color: #60a5fa; }
+.time-block.weekend-pm { background: #fff7ed; border-color: #fed7aa; }
+.time-block.weekend-pm .tb-title { color: #ea580c; }
+.time-block.weekend-pm .tb-desc { color: #fb923c; }
+
+/* Checklist */
+.check-section { margin-bottom: 20px; }
+.check-section-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.check-section-badge { font-size: 11px; }
+.check-items { display: flex; flex-direction: column; gap: 6px; }
+.check-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: var(--white); border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; transition: all .15s; }
+.check-item:hover { border-color: var(--teal); }
+.check-item.done { background: var(--teal-light); border-color: #99f6e4; }
+.check-item.done .check-text { text-decoration: line-through; color: var(--text3); }
+.check-box { width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--border); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.check-item.done .check-box { background: var(--teal); border-color: var(--teal); }
+.check-tick { color: white; font-size: 11px; display: none; }
+.check-item.done .check-tick { display: block; }
+.check-text { font-size: 13px; color: var(--text); line-height: 1.4; flex: 1; }
+.check-tag { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; flex-shrink: 0; }
+
+/* Insight cards */
+.insight-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.insight-row:last-child { border-bottom: none; }
+.ins-label { font-size: 12px; color: var(--text2); flex: 1; }
+.ins-bar-wrap { width: 100px; height: 6px; background: var(--gray-light); border-radius: 3px; overflow: hidden; }
+.ins-bar-fill { height: 100%; border-radius: 3px; }
+.ins-pct { font-size: 12px; font-weight: 600; color: var(--text); min-width: 35px; text-align: right; }
+
+/* Progress ring per phase */
+.phase-prog { display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.phase-prog-label { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+/* Tab pills */
+.tab-pills { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-pill { padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--white); color: var(--text2); transition: all .15s; }
+.tab-pill:hover { border-color: var(--teal); color: var(--teal-dark); }
+.tab-pill.active { background: var(--teal); border-color: var(--teal); color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Lecture bar chart */
+.lec-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.lec-bar-label { font-size: 12px; color: var(--text); min-width: 190px; display: flex; justify-content: space-between; }
+.lec-bar-name { font-weight: 500; }
+.lec-bar-inst { color: var(--text3); font-size: 11px; }
+.lec-bar-track { flex: 1; height: 24px; background: var(--gray-light); border-radius: 4px; overflow: hidden; }
+.lec-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 600; color: white; }
+.lec-bar-h { font-size: 12px; font-weight: 600; color: var(--text); min-width: 35px; text-align: right; }
+
+/* Alert */
+.alert { border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 16px; font-size: 12px; line-height: 1.6; }
+.alert-teal { background: var(--teal-light); color: var(--teal-dark); border: 1px solid #99f6e4; }
+.alert-amber { background: var(--amber-light); color: #92400e; border: 1px solid #fde68a; }
+.alert-red { background: var(--red-light); color: #991b1b; border: 1px solid #fca5a5; }
+.alert strong { font-weight: 700; }
+
+/* 70% rule banner */
+.rule70 { background: #0f172a; border-radius: var(--radius); padding: 20px 24px; margin-bottom: 20px; display: flex; gap: 20px; align-items: flex-start; }
+.rule70-num { font-size: 48px; font-weight: 900; color: var(--teal); line-height: 1; flex-shrink: 0; letter-spacing: -2px; }
+.rule70-body {}
+.rule70-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.rule70-desc { font-size: 13px; color: #94a3b8; line-height: 1.7; }
+.rule70-desc strong { color: var(--teal); font-weight: 600; }
+.rule70-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.rule70-tag { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+.rule70-tag-teal { background: rgba(20,184,166,.2); color: var(--teal); }
+.rule70-tag-white { background: rgba(255,255,255,.1); color: #cbd5e1; }
+.cycle-row { display: flex; align-items: center; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+.cycle-box { background: rgba(255,255,255,.08); border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600; color: #e2e8f0; }
+.cycle-arrow { color: var(--teal); font-size: 14px; font-weight: 700; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 3px; }
+
+/* Progress */
+.prog-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.prog-track { flex: 1; height: 5px; background: var(--gray-light); border-radius: 3px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 3px; transition: width .3s; }
+
+
+/* Daily plan */
+.week-group { margin-bottom: 12px; }
+.week-header { background: var(--bg); color: #fff; padding: 12px 18px; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; }
+.week-header-left { display: flex; align-items: center; gap: 10px; }
+.week-header-title { font-size: 13px; font-weight: 700; }
+.week-header-sub { font-size: 11px; color: #64748b; }
+.week-header-arrow { font-size: 12px; color: #64748b; transition: transform .2s; }
+.week-header.open .week-header-arrow { transform: rotate(180deg); }
+.week-days { display: none; padding: 4px 0 0; }
+.week-days.open { display: block; }
+.day-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 6px; overflow: hidden; }
+.day-card.rest-day { background: #fef2f2; border-color: #fecaca; }
+.day-card.exam-day { background: #0f172a; border-color: var(--teal); }
+.day-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.day-card.rest-day .day-header { border-bottom-color: #fecaca; }
+.day-card.exam-day .day-header { border-bottom-color: rgba(20,184,166,.3); }
+.day-num { font-size: 11px; font-weight: 700; color: #fff; background: #334155; padding: 2px 7px; border-radius: 4px; min-width: 44px; text-align: center; }
+.day-date { font-size: 13px; font-weight: 700; color: var(--text); }
+.day-card.rest-day .day-date { color: #b91c1c; }
+.day-card.exam-day .day-date { color: #fff; }
+.day-dow { font-size: 11px; color: var(--text3); }
+.day-card.exam-day .day-dow { color: var(--teal); }
+.day-hours { font-size: 11px; font-weight: 600; color: var(--teal-dark); margin-left: auto; }
+.day-card.exam-day .day-hours { color: var(--teal); }
+.day-tasks { padding: 8px 14px 10px; display: flex; flex-direction: column; gap: 5px; }
+.day-task { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; padding: 5px 8px; border-radius: 4px; border: 1px solid transparent; transition: all .15s; }
+.day-task:hover { background: #f0fdf4; border-color: #bbf7d0; }
+.day-task.done { background: var(--teal-light); border-color: #99f6e4; }
+.day-task.done .day-task-text { text-decoration: line-through; color: var(--text3); }
+.day-task.exam-task { cursor: default; }
+.day-task.exam-task:hover { background: transparent; border-color: transparent; }
+.dt-box { width: 16px; height: 16px; border-radius: 3px; border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.day-task.done .dt-box { background: var(--teal); border-color: var(--teal); }
+.dt-tick { color: #fff; font-size: 10px; display: none; }
+.day-task.done .dt-tick { display: block; }
+.day-task-text { font-size: 12px; color: var(--text); line-height: 1.5; flex: 1; }
+.day-card.exam-day .day-task-text { color: #e2e8f0; }
+.phase-pip { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.daily-progress { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.dp-stat { display: flex; flex-direction: column; gap: 3px; }
+.dp-num { font-size: 22px; font-weight: 700; color: var(--text); }
+.dp-lbl { font-size: 11px; color: var(--text3); }
+
+
+/* Study Tracker */
+.tracker-week { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+.tracker-week-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--gray-light); border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 8px; }
+.tw-left { font-size: 13px; font-weight: 700; color: var(--text); }
+.tw-right { display: flex; align-items: center; gap: 12px; font-size: 12px; }
+.tw-actual { font-weight: 700; color: var(--teal-dark); }
+.tw-target { color: var(--text3); }
+.tw-bar-wrap { width: 80px; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+.tw-bar-fill { height: 100%; border-radius: 3px; background: var(--teal); transition: width .3s; }
+.tracker-day-row { display: grid; grid-template-columns: 50px 30px 48px 1fr 90px; align-items: center; gap: 8px; padding: 8px 18px; border-bottom: 1px solid #f8fafc; }
+.tracker-day-row:last-child { border-bottom: none; }
+.tracker-day-row.rest-row { background: #fef9f9; }
+.td-daynum { font-size: 11px; font-weight: 700; color: #fff; padding: 2px 6px; border-radius: 4px; text-align: center; }
+.td-dow { font-size: 12px; color: var(--text3); font-weight: 500; }
+.td-date { font-size: 12px; color: var(--text2); }
+.td-label { font-size: 12px; color: var(--text2); }
+.td-input-wrap { display: flex; align-items: center; gap: 5px; }
+.td-input { width: 60px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-weight: 600; color: var(--text); text-align: center; background: var(--white); }
+.td-input:focus { outline: none; border-color: var(--teal); }
+.td-input-unit { font-size: 11px; color: var(--text3); }
+.td-rest-badge { font-size: 11px; color: #f87171; font-weight: 500; }
+.tracker-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+.ts-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; text-align: center; }
+.ts-val { font-size: 22px; font-weight: 700; color: var(--text); }
+.ts-lbl { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.export-btn { padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--white); font-size: 12px; font-weight: 600; cursor: pointer; color: var(--text2); }
+.export-btn:hover { border-color: var(--teal); color: var(--teal-dark); }
+@media (max-width: 768px) {
+  .tracker-day-row { grid-template-columns: 42px 26px 40px 1fr 80px; gap: 4px; padding: 7px 12px; }
+  .tracker-summary { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* Gist Sync */
+.sync-btn { position: fixed; bottom: 100px; right: 16px; width: 44px; height: 44px; border-radius: 50%; background: #24292e; color: white; border: none; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 200; }
+.sync-btn.syncing { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 300; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: var(--white); border-radius: var(--radius); padding: 24px; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; }
+.modal-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.modal-sub { font-size: 12px; color: var(--text3); margin-bottom: 20px; line-height: 1.6; }
+.modal-field { margin-bottom: 14px; }
+.modal-label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 5px; display: block; }
+.modal-input { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; color: var(--text); }
+.modal-input:focus { outline: none; border-color: var(--teal); }
+.modal-btns { display: flex; gap: 8px; margin-top: 18px; }
+.modal-btn-primary { flex: 1; padding: 10px; border-radius: 6px; border: none; background: var(--teal); color: white; font-size: 13px; font-weight: 600; cursor: pointer; }
+.modal-btn-cancel { padding: 10px 18px; border-radius: 6px; border: 1px solid var(--border); background: var(--white); font-size: 13px; color: var(--text2); cursor: pointer; }
+.sync-status { font-size: 11px; margin-top: 8px; padding: 6px 10px; border-radius: 4px; }
+.sync-ok { background: #dcfce7; color: #15803d; }
+.sync-err { background: #fef2f2; color: #b91c1c; }
+.sync-info { background: #dbeafe; color: #1d4ed8; }
+@media (max-width: 768px) { .sync-btn { bottom: 90px; } }
+
+/* Countdown */
+.countdown-banner { background: var(--bg); border-radius: var(--radius); padding: 18px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+.countdown-left { display: flex; flex-direction: column; gap: 4px; }
+.countdown-label { font-size: 11px; font-weight: 600; color: var(--teal); letter-spacing: .07em; text-transform: uppercase; }
+.countdown-date { font-size: 13px; color: #94a3b8; }
+.countdown-nums { display: flex; gap: 10px; align-items: flex-end; }
+.cd-box { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.cd-num { font-size: 36px; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -1px; min-width: 52px; text-align: center; }
+.cd-lbl { font-size: 10px; color: #64748b; font-weight: 500; }
+.cd-sep { font-size: 28px; font-weight: 700; color: #334155; margin-bottom: 8px; }
+.cd-progress-wrap { margin-top: 8px; }
+.cd-progress-label { display: flex; justify-content: space-between; font-size: 11px; color: #64748b; margin-bottom: 5px; }
+.cd-bar-track { height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; }
+.cd-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--teal), #3b82f6); transition: width 1s; }
+
+/* Mobile */
+.hamburger { display: none; position: fixed; top: 14px; left: 14px; z-index: 100; background: var(--bg2); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 9; }
+.overlay.show { display: block; }
+.bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid rgba(255,255,255,.1); padding: 6px 0; z-index: 10; flex-direction: row; }
+.bottom-nav-item { flex: 1; min-width: 52px; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 2px; cursor: pointer; color: var(--gray); font-size: 9px; font-weight: 500; white-space: nowrap; border: none; background: transparent; }
+.bottom-nav-item.active { color: var(--teal); }
+.bottom-nav-item .bn-icon { font-size: 16px; }
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); transition: transform .25s; z-index: 50; }
+  .sidebar.open { transform: translateX(0); }
+  .hamburger { display: flex; }
+  .main { margin-left: 0; padding-bottom: 80px; }
+  .bottom-nav { display: flex; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .page { padding: 20px 16px; padding-top: 64px; }
+  .order-card { grid-template-columns: 36px 1fr; }
+  .order-meta { display: none; }
+  .week-grid { gap: 4px; }
+  .week-day { padding: 8px 4px; }
+  .week-day-h { font-size: 15px; }
+  .rule70 { flex-direction: column; gap: 10px; }
+  .rule70-num { font-size: 36px; }
+  .lec-bar-label { min-width: 120px; }
+  .tab-pills { gap: 4px; }
+  .tab-pill { font-size: 11px; padding: 5px 10px; }
+}
+</style>
+</head>
+<body>
+
+<button class="hamburger" onclick="toggleSidebar()" aria-label="메뉴">☰</button>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bottom-nav-item active" onclick="goPageMobile('start')"><span class="bn-icon">🚀</span>시작</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('overview')"><span class="bn-icon">📊</span>개요</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('subjects')"><span class="bn-icon">📚</span>순서</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('lectures')"><span class="bn-icon">🎬</span>강의</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('schedule')"><span class="bn-icon">🗓</span>스케줄</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('checklist')"><span class="bn-icon">✅</span>체크</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('tracker')"><span class="bn-icon">⏱</span>공부기록</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('daily')"><span class="bn-icon">📅</span>일별계획</button>
+  <button class="bottom-nav-item" onclick="goPageMobile('insights')"><span class="bn-icon">💡</span>인사이트</button>
+</nav>
+
+<div class="shell">
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="logo">
+    <div class="logo-title">CFA Level 1</div>
+    <div class="logo-sub">120일 직장인 학습 계획</div>
+  </div>
+  <div class="nav-label">메뉴</div>
+  <div class="nav-item" onclick="goPage('start')"><span class="nav-icon">🚀</span> 시작하기 전에</div>
+  <div class="nav-item active" onclick="goPage('overview')"><span class="nav-icon">📊</span> 개요</div>
+  <div class="nav-item" onclick="goPage('subjects')"><span class="nav-icon">📚</span> 과목 공부 순서</div>
+  <div class="nav-item" onclick="goPage('lectures')"><span class="nav-icon">🎬</span> 강의 계획</div>
+  <div class="nav-item" onclick="goPage('schedule')"><span class="nav-icon">🗓</span> 주간 스케줄</div>
+  <div class="nav-item" onclick="goPage('checklist')"><span class="nav-icon">✅</span> 체크리스트</div>
+  <div class="nav-item" onclick="goPage('tracker')"><span class="nav-icon">⏱</span> 공부 기록</div>
+  <div class="nav-item" onclick="goPage('daily')"><span class="nav-icon">📅</span> 일별 강의 계획</div>
+  <div class="nav-item" onclick="goPage('insights')"><span class="nav-icon">💡</span> 합격수기 인사이트</div>
+  <div class="sidebar-footer">63개 합격수기 분석 기반<br>2025 · CFA Lv1 플래너</div>
+</nav>
+
+<!-- Main -->
+<div class="main">
+
+<!-- ==================== 개요 ==================== -->
+<div id="page-overview" class="page active">
+  <div class="page-header">
+    <div class="page-title">학습 계획 개요</div>
+    <div class="page-sub">직장인 · CFA Level 1 · 120일 · 63개 합격수기 분석 기반</div>
+  </div>
+
+  <div class="countdown-banner">
+    <div class="countdown-left">
+      <div class="countdown-label">⏰ 시험까지 남은 시간</div>
+      <div class="countdown-date">시험일: 2026년 8월 24일</div>
+      <div class="cd-progress-wrap" style="min-width:200px">
+        <div class="cd-progress-label"><span id="progressPct">--%</span><span>진행률</span></div>
+        <div class="cd-bar-track"><div class="cd-bar-fill" id="progressBar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="countdown-nums">
+      <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-lbl">일</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-lbl">시간</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-lbl">분</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-lbl">초</div></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-val">510<span class="stat-unit" style="font-size:14px">h</span></div>
+      <div class="stat-lbl">120일 총 가용 시간</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">196<span class="stat-unit" style="font-size:14px">h</span></div>
+      <div class="stat-lbl">인강 합계 (Final Review 포함, 1.1배속)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">314<span class="stat-unit" style="font-size:14px">h</span></div>
+      <div class="stat-lbl">슈웨이저·문제풀이 여유</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">70<span class="stat-unit" style="font-size:14px">%+</span></div>
+      <div class="stat-lbl">Mock Exam 목표 점수</div>
+    </div>
+  </div>
+
+  <div class="rule70">
+    <div class="rule70-num">70%</div>
+    <div class="rule70-body">
+      <div class="rule70-title">70% 이해했으면 넘어가라 — 합격수기 공통 원칙</div>
+      <div class="rule70-desc">
+        인강 1회독 때 100% 이해하려고 붙잡으면 일정이 망가집니다.<br>
+        <strong>특히 FSA와 FI</strong>는 처음엔 당연히 이해가 안 되는 게 정상이에요.<br>
+        "슈웨이저 2회독 때 갑자기 번쩍 뜨인다" — 이 말이 수기에서 반복적으로 나왔어요.
+      </div>
+      <div class="cycle-row">
+        <div class="cycle-box">인강 1회독 (70% 이해)</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box">슈웨이저 1회독 (80%)</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box">슈웨이저 2회독 (번쩍)</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box">문제풀이로 완성</div>
+      </div>
+      <div class="rule70-tags">
+        <span class="rule70-tag rule70-tag-teal">모르면 일단 넘어가기</span>
+        <span class="rule70-tag rule70-tag-teal">2회독에서 채우기</span>
+        <span class="rule70-tag rule70-tag-white">붙잡을수록 일정 망가짐</span>
+        <span class="rule70-tag rule70-tag-white">FSA · FI 특히 해당</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-teal">
+    <strong>합격수기 공통 전략:</strong> 슈웨이저 다회독 + 단권화, Ethics 마지막 집중, Mock 70% 이상, 출퇴근 인강 활용. 직장인 합격자 평균 평일 공부 시간은 1.5~2.5시간 — 3.5h 목표보다 2h 목표가 지속 가능성이 훨씬 높습니다.
+  </div>
+
+  <div class="sect">선택한 강사 구성</div>
+  <div class="grid2">
+    <div class="card">
+      <div style="overflow-x:auto"><table style="width:100%;font-size:12px;border-collapse:collapse;min-width:500px">
+        <thead><tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:6px 0;color:var(--text3);font-weight:600">과목</th><th style="text-align:left;padding:6px 0;color:var(--text3);font-weight:600">강사</th><th style="text-align:right;padding:6px 0;color:var(--text3);font-weight:600">실시간</th><th style="text-align:right;padding:6px 0;color:var(--text3);font-weight:600">1.1배속</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">FSA</td><td style="color:var(--text2)">권오상</td><td style="text-align:right;color:var(--text2)">24h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">22h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Fixed Income</td><td style="color:var(--text2)">김종곤</td><td style="text-align:right;color:var(--text2)">26h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">24h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Equity</td><td style="color:var(--text2)">유태인</td><td style="text-align:right;color:var(--text2)">21h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">19h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Quant</td><td style="color:var(--text2)">신우석</td><td style="text-align:right;color:var(--text2)">20h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">18h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Corporate Issuers</td><td style="color:var(--text2)">지한송</td><td style="text-align:right;color:var(--text2)">15h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">14h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Portfolio</td><td style="color:var(--text2)">김서호</td><td style="text-align:right;color:var(--text2)">11h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">10h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">AI</td><td style="color:var(--text2)">신우석</td><td style="text-align:right;color:var(--text2)">10h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">9h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Ethics</td><td style="color:var(--text2)">이규민</td><td style="text-align:right;color:var(--text2)">15h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">14h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Economics</td><td style="color:var(--text2)">김형진</td><td style="text-align:right;color:var(--text2)">14h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">13h</td></tr>
+          <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;color:var(--text)">Derivatives</td><td style="color:var(--text2)">박정준</td><td style="text-align:right;color:var(--text2)">15h</td><td style="text-align:right;font-weight:600;color:var(--teal-dark)">14h</td></tr>
+          <tr><td style="padding:7px 0;font-weight:600;color:var(--text)">Final Review</td><td style="color:var(--text2)">김종곤</td><td style="text-align:right;color:var(--text2)">39h</td><td style="text-align:right;font-weight:600;color:#2563eb">36h</td></tr>
+        </tbody>
+        <tfoot><tr style="border-top:2px solid var(--border)"><td colspan="3" style="padding:8px 0;font-weight:700;color:var(--text)">합계 (FSA 2회독 포함)</td><td style="text-align:right;font-weight:700;color:var(--teal-dark);font-size:14px">~210h</td></tr></tfoot>
+      </table></div>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px">120일 단계별 시간 배분</div>
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text2)">Phase 1 · 핵심 인강 (Day 1~42)</span><span style="font-weight:600">약 142h</span></div>
+        <div class="prog-track"><div class="prog-fill" style="width:28%;background:#ef4444"></div></div>
+      </div>
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text2)">Phase 2 · 나머지 인강 + 슈웨이저 (Day 43~77)</span><span style="font-weight:600">약 170h</span></div>
+        <div class="prog-track"><div class="prog-fill" style="width:33%;background:#f59e0b"></div></div>
+      </div>
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text2)">Phase 3 · Ethics + 문제풀이 (Day 78~105)</span><span style="font-weight:600">약 136h</span></div>
+        <div class="prog-track"><div class="prog-fill" style="width:27%;background:#14b8a6"></div></div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--text2)">Phase 4 · Final Review + Mock (Day 106~120)</span><span style="font-weight:600">약 62h</span></div>
+        <div class="prog-track"><div class="prog-fill" style="width:12%;background:#3b82f6"></div></div>
+      </div>
+      <div class="alert alert-amber" style="font-size:12px">
+        <strong>메인 인강 160h + Final Review 36h = 인강 합계 196h (1.1배속 기준)<br>FSA 2회독 +14h 포함 시 총 210h · 나머지 300h = 슈웨이저 회독 + LES 문제풀이 + Mock</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 과목 순서 ==================== -->
+<div id="page-subjects" class="page">
+  <div class="page-header">
+    <div class="page-title">과목 공부 순서</div>
+    <div class="page-sub">63개 합격수기 기반 · FSA 먼저, Ethics 마지막이 핵심</div>
+  </div>
+
+  <div class="rule70">
+    <div class="rule70-num">70%</div>
+    <div class="rule70-body">
+      <div class="rule70-title">인강 들을 때 — 70% 이해했으면 넘어가라</div>
+      <div class="rule70-desc">
+        과목 순서보다 이 원칙이 더 중요합니다.<br>
+        <strong>FSA, FI, Derivatives</strong>에서 특히 적용 — 첫 번째 강의 때 완전히 이해하려 붙잡으면 진도가 안 나갑니다.<br>
+        슈웨이저 회독 때 자연스럽게 채워지니, 모르는 부분은 체크만 하고 넘어가세요.
+      </div>
+      <div class="rule70-tags">
+        <span class="rule70-tag rule70-tag-teal">이해 안 돼도 정상</span>
+        <span class="rule70-tag rule70-tag-teal">체크 후 넘어가기</span>
+        <span class="rule70-tag rule70-tag-white">2회독에서 번쩍 뜨임</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-teal" style="font-size:12px">
+    <strong>원칙:</strong> FSA와 Ethics 위치만 고정하면 나머지는 유동적으로 조정 가능합니다. FI → Derivatives 순서는 채권 개념이 파생 이해에 필수이므로 반드시 지키세요.
+  </div>
+
+  <div class="order-card highlight">
+    <div class="order-num" style="background:#fef2f2;color:#ef4444">1</div>
+    <div class="order-body">
+      <div class="order-name">Financial Statement Analysis (FSA)</div>
+      <div class="order-inst">권오상 강사</div>
+      <div class="order-desc">비중 최고 (11~14%) · 다른 모든 과목의 기초 · 63개 수기 100% 동의 "인강 2회독" · 초반 의욕 최고일 때 가장 어려운 과목 처리</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">22h</div>
+      <div class="order-h-sub">1.1배속 1회독</div>
+      <div class="order-h-sub">2회독 추가 +14h</div>
+      <div style="margin-top:6px"><span class="badge badge-red">핵심 과목</span></div>
+    </div>
+  </div>
+
+  <div class="order-card highlight">
+    <div class="order-num" style="background:#fef2f2;color:#ef4444">2</div>
+    <div class="order-body">
+      <div class="order-name">Fixed Income (채권)</div>
+      <div class="order-inst">김종곤 강사</div>
+      <div class="order-desc">두 번째로 어렵고 분량 가장 많음 · 이해에 오랜 시간 필요 → 초반 배정 필수 · Derivatives와 직접 연계 · 슈웨이저 3회독 권장</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">24h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-red">핵심 과목</span></div>
+    </div>
+  </div>
+
+  <div class="order-card highlight2">
+    <div class="order-num" style="background:#ccfbf1;color:#0f766e">3</div>
+    <div class="order-body">
+      <div class="order-name">Equity Investments (주식)</div>
+      <div class="order-inst">유태인 강사</div>
+      <div class="order-desc">비중 높음 (11~14%) · FSA에서 배운 재무비율·현금흐름 분석과 직접 연계 · 강의노트 퀄리티 최상 · 계산문제 반복 필요</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">19h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-teal">FSA 연계</span></div>
+    </div>
+  </div>
+
+  <div class="order-card highlight2">
+    <div class="order-num" style="background:#ccfbf1;color:#0f766e">4</div>
+    <div class="order-body">
+      <div class="order-name">Corporate Issuers (기업재무)</div>
+      <div class="order-inst">지한송 강사</div>
+      <div class="order-desc">어렵지 않고 분량 적음 · FSA + Equity 배운 후 자연스럽게 연결 · 일주일 내에 끝낼 수 있는 과목 · 계산 파트 전달력 좋음</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">14h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-teal">Equity 연계</span></div>
+    </div>
+  </div>
+
+  <div class="order-card highlight2">
+    <div class="order-num" style="background:#ccfbf1;color:#0f766e">5</div>
+    <div class="order-body">
+      <div class="order-name">Derivatives (파생상품)</div>
+      <div class="order-inst">박정준 강사</div>
+      <div class="order-desc">Fixed Income의 Forward Rate, ABS 개념과 직접 연계 → FI 이후에 반드시 배치 · 내용 어렵지만 시험은 평이. 강의노트 중심으로 이해 · 핸드아웃으로 이해 위주</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">14h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-red">FI 후에 필수</span></div>
+    </div>
+  </div>
+
+  <div class="order-card" style="border-left:4px solid var(--green)">
+    <div class="order-num" style="background:#dcfce7;color:#15803d">6</div>
+    <div class="order-body">
+      <div class="order-name">Alternative Investments (대체투자)</div>
+      <div class="order-inst">신우석 강사</div>
+      <div class="order-desc">63개 수기 모두 "가성비 최강" · 분량 가장 적음 · Summary 노트만으로 고득점 가능 · 중간 기분전환용으로도 최적 · 어느 위치에 두어도 무방</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">9h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge" style="background:#dcfce7;color:#15803d">가성비 1위</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-num" style="background:#f1f5f9;color:#475569">7</div>
+    <div class="order-body">
+      <div class="order-name">Quantitative Methods (통계)</div>
+      <div class="order-inst">신우석 강사</div>
+      <div class="order-desc">Portfolio Management와 연계 · Summary 노트 퀄리티 최상 · 깊이 파지 말 것 — 가성비 낮음 · 시험 난이도는 실제로 평이하게 출제</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">18h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-gray">PM 연계</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-num" style="background:#f1f5f9;color:#475569">8</div>
+    <div class="order-body">
+      <div class="order-name">Portfolio Management (포트폴리오)</div>
+      <div class="order-inst">김서호 강사</div>
+      <div class="order-desc">Quant + Equity + Corp 개념 모두 연결 · 후반에 들으면 전체 그림이 보임 · CAPM 위주 이해 · Risk 관련 설명 명쾌</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">10h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-gray">전 과목 연계</span></div>
+    </div>
+  </div>
+
+  <div class="order-card">
+    <div class="order-num" style="background:#f1f5f9;color:#475569">9</div>
+    <div class="order-body">
+      <div class="order-name">Economics (경제학)</div>
+      <div class="order-inst">김형진 강사</div>
+      <div class="order-desc">양 많지만 출제 비중 낮음 · "가성비 최하" — 수기 다수 언급 · 그래프 이해 위주, 깊이 파지 말 것 · "존버가 정공법" (실제 수기 인용)</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">13h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-gray">적당히 OK</span></div>
+    </div>
+  </div>
+
+  <div class="order-card" style="border:2px solid var(--red)">
+    <div class="order-num" style="background:#fef2f2;color:#ef4444">10</div>
+    <div class="order-body">
+      <div class="order-name">Ethics (윤리) — 반드시 마지막</div>
+      <div class="order-inst">이규민 강사 · 핸드아웃 압도적 1위</div>
+      <div class="order-desc">휘발성 강해 일찍 공부하면 시험 때 다 잊음 · 암기보다 문제풀이가 핵심 · 시험 1~1.5달 전부터 집중 · 63개 수기 78% 이상 마지막 배치 권장 · 합격 당락 과목</div>
+    </div>
+    <div class="order-meta">
+      <div class="order-h">14h</div>
+      <div class="order-h-sub">1.1배속 기준</div>
+      <div style="margin-top:6px"><span class="badge badge-red">반드시 마지막</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 강의 계획 ==================== -->
+<div id="page-lectures" class="page">
+  <div class="page-header">
+    <div class="page-title">강의 계획 (1.1배속 기준)</div>
+    <div class="page-sub">실제 시청 시간 = 원래 강의 시간 ÷ 1.1 · FSA는 2회독 포함</div>
+  </div>
+
+  <div class="rule70">
+    <div class="rule70-num">70%</div>
+    <div class="rule70-body">
+      <div class="rule70-title">강의 들을 때 핵심 원칙 — 70% 이해했으면 넘어가라</div>
+      <div class="rule70-desc">
+        <strong>인강 1회독:</strong> 모르는 거 나와도 일단 넘어가기. 완전히 이해하려 붙잡으면 일정이 망가집니다.<br>
+        <strong>슈웨이저 1회독:</strong> 이해 안 되는 부분 체크만 하고 일단 넘어가기.<br>
+        <strong>슈웨이저 2회독:</strong> "갑자기 번쩍 뜨인다" — 수기에서 반복 등장하는 표현이에요.<br>
+        <strong>문제풀이:</strong> 틀린 문제에서 개념 완성. 이 사이클이 가장 효율적입니다.
+      </div>
+      <div class="cycle-row">
+        <div class="cycle-box">인강 (70%)</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box">슈웨이저 1회독</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box">슈웨이저 2회독 (번쩍)</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box">문제풀이 완성</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-amber" style="font-size:12px;margin-bottom:20px">
+    <strong>1.1배속 적용 원칙:</strong> 1.5배속으로 틀지만 일시정지·되감기 포함해 실제로는 1.1배속 수준으로 시간이 소요됩니다. 이를 반영해 계산했습니다.
+  </div>
+
+  <div class="sect">과목별 강의 시간 비교</div>
+  <div class="card" style="margin-bottom:20px">
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Fixed Income</span><span class="lec-bar-inst">김종곤</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:92%;background:#ef4444">24h</div></div>
+      <div class="lec-bar-h">24h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">FSA × 2회독</span><span class="lec-bar-inst">권오상</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:100%;background:#dc2626">22+14h</div></div>
+      <div class="lec-bar-h">36h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Equity</span><span class="lec-bar-inst">유태인</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:73%;background:#f97316">19h</div></div>
+      <div class="lec-bar-h">19h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Quant</span><span class="lec-bar-inst">신우석</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:69%;background:#eab308">18h</div></div>
+      <div class="lec-bar-h">18h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Ethics</span><span class="lec-bar-inst">이규민</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:54%;background:#14b8a6">14h</div></div>
+      <div class="lec-bar-h">14h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Corporate Issuers</span><span class="lec-bar-inst">지한송</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:54%;background:#14b8a6">14h</div></div>
+      <div class="lec-bar-h">14h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Derivatives</span><span class="lec-bar-inst">박정준</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:54%;background:#14b8a6">14h</div></div>
+      <div class="lec-bar-h">14h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Economics</span><span class="lec-bar-inst">김형진</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:50%;background:#8b5cf6">13h</div></div>
+      <div class="lec-bar-h">13h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">Portfolio</span><span class="lec-bar-inst">김서호</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:38%;background:#3b82f6">10h</div></div>
+      <div class="lec-bar-h">10h</div>
+    </div>
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name">AI</span><span class="lec-bar-inst">신우석</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:35%;background:#22c55e">9h</div></div>
+      <div class="lec-bar-h">9h</div>
+    </div>
+    <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px">
+    <div class="lec-bar-row">
+      <div class="lec-bar-label"><span class="lec-bar-name" style="color:#2563eb">Final Review</span><span class="lec-bar-inst" style="color:#2563eb">김종곤</span></div>
+      <div class="lec-bar-track"><div class="lec-bar-fill" style="width:100%;background:#2563eb">36h</div></div>
+      <div class="lec-bar-h" style="color:#2563eb">36h</div>
+    </div>
+    </div>
+  </div>
+
+  <div class="sect">Phase별 인강 배분 계획</div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#fef2f2;color:#ef4444">P1</div>
+      <div class="tl-body">
+        <div class="tl-title">Phase 1 · 핵심 인강 집중</div>
+        <div class="tl-days">Day 1 ~ 42 · 6주 · 약 204h 가용</div>
+        <div class="tl-subjects">
+          <div class="tl-subj"><span class="tl-subj-name"><strong>FSA</strong> 1회독 (권오상) — 주말 집중 투입</span><div class="tl-subj-right"><span class="badge badge-red">Day 1~14</span><span class="tl-subj-h">22h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Fixed Income</strong> (김종곤) — 출퇴근 인강으로 병행 시작</span><div class="tl-subj-right"><span class="badge badge-red">Day 10~35</span><span class="tl-subj-h">24h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>FSA</strong> 2회독 — 이해 안된 부분 집중 재수강</span><div class="tl-subj-right"><span class="badge badge-amber">Day 15~25</span><span class="tl-subj-h">14h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Equity</strong> (유태인)</span><div class="tl-subj-right"><span class="badge badge-teal">Day 30~42</span><span class="tl-subj-h">19h</span></div></div>
+        </div>
+        <div class="tl-note">⚡ 출퇴근 인강(1h/일 × 4일 = 4h/주) + 출근 전(2h/일) + 주말(22h) = 34h/주. FSA는 주말 전량 투입. FI는 출퇴근 시 청취로 자연스럽게 병행.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#fef3c7;color:#d97706">P2</div>
+      <div class="tl-body">
+        <div class="tl-title">Phase 2 · 나머지 인강 + 슈웨이저 시작</div>
+        <div class="tl-days">Day 43 ~ 77 · 5주 · 약 170h 가용</div>
+        <div class="tl-subjects">
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Corporate Issuers</strong> (지한송)</span><div class="tl-subj-right"><span class="badge badge-amber">Day 43~51</span><span class="tl-subj-h">14h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Derivatives</strong> (박정준) — FI 직후 반드시 배치</span><div class="tl-subj-right"><span class="badge badge-amber">Day 50~60</span><span class="tl-subj-h">14h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>AI</strong> (신우석) — 기분전환 겸 빠르게 처리</span><div class="tl-subj-right"><span class="badge badge-teal">Day 57~62</span><span class="tl-subj-h">9h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Quant</strong> (신우석)</span><div class="tl-subj-right"><span class="badge badge-teal">Day 60~72</span><span class="tl-subj-h">18h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Portfolio</strong> (김서호)</span><div class="tl-subj-right"><span class="badge badge-teal">Day 68~74</span><span class="tl-subj-h">10h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Economics</strong> (김형진)</span><div class="tl-subj-right"><span class="badge badge-gray">Day 72~77</span><span class="tl-subj-h">13h</span></div></div>
+        </div>
+        <div class="tl-note">📖 인강과 동시에 슈웨이저 1회독 병행 시작 (FSA부터). 출근 전 2h = 슈웨이저 읽기 / 출퇴근 = 인강. 이 단계부터 단권화 노트 만들기 시작.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#ccfbf1;color:#0f766e">P3</div>
+      <div class="tl-body">
+        <div class="tl-title">Phase 3 · Ethics + 슈웨이저 + 문제풀이</div>
+        <div class="tl-days">Day 78 ~ 105 · 4주 · 약 136h 가용</div>
+        <div class="tl-subjects">
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Ethics</strong> (이규민) 인강 + 규정 암기</span><div class="tl-subj-right"><span class="badge badge-red">Day 78~88</span><span class="tl-subj-h">14h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name">Ethics 문제풀이 (하루 10문제씩 꾸준히)</span><div class="tl-subj-right"><span class="badge badge-red">Day 78~105</span><span class="tl-subj-h">지속</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name">슈웨이저 2회독 + 단권화 완성</span><div class="tl-subj-right"><span class="badge badge-teal">Day 78~100</span><span class="tl-subj-h">~60h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name">LES 에코시스템 문제풀이 (약점 과목 집중)</span><div class="tl-subj-right"><span class="badge badge-teal">Day 88~105</span><span class="tl-subj-h">~40h</span></div></div>
+        </div>
+        <div class="tl-note">🎯 이 단계부터 인강 대신 문제풀이 중심으로 전환. Ethics는 개념 암기 후 문제풀이. LES Easy~Medium 위주 (Difficult는 시간 낭비). Economics + Quant 문제에 과투자 금지.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#dbeafe;color:#1d4ed8">P4</div>
+      <div class="tl-body">
+        <div class="tl-title">Phase 4 · Final Review + Mock + 마무리</div>
+        <div class="tl-days">Day 106 ~ 120 · 2주 · 약 62h</div>
+        <div class="tl-subjects">
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Final Review</strong> (김종곤) — 문제풀이 병행</span><div class="tl-subj-right"><span class="badge badge-blue">Day 106~116</span><span class="tl-subj-h">36h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Mock Exam 1회차</strong> (CFA 협회 무료)</span><div class="tl-subj-right"><span class="badge badge-blue">Day 112~113</span><span class="tl-subj-h">4.5h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name">Mock 1 오답 분석 + 단권화 보강</span><div class="tl-subj-right"><span class="badge badge-blue">Day 114</span><span class="tl-subj-h">4h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name"><strong>Mock Exam 2회차</strong></span><div class="tl-subj-right"><span class="badge badge-blue">Day 117~118</span><span class="tl-subj-h">4.5h</span></div></div>
+          <div class="tl-subj"><span class="tl-subj-name">단권화 노트 최종 1회독 + Ethics 핸드아웃</span><div class="tl-subj-right"><span class="badge badge-gray">Day 119~120</span><span class="tl-subj-h">마무리</span></div></div>
+        </div>
+        <div class="tl-note">🏁 Mock 70%+ = 합격권. 60%대 나와도 실제 시험이 더 쉽게 느껴진다는 수기 90%+. 시험 전날 새 내용 공부 NO — 단권화 노트 + Ethics 핸드아웃만 봄.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== 주간 스케줄 ==================== -->
+<div id="page-schedule" class="page">
+  <div class="page-header">
+    <div class="page-title">주간 스케줄</div>
+    <div class="page-sub">직장인 현실 기반 · 주당 34h · 출퇴근 인강 포함</div>
+  </div>
+
+  <div class="sect">요일별 공부 시간</div>
+  <div class="week-grid">
+    <div class="week-day weekday"><div class="week-day-name">월</div><div class="week-day-h" style="color:#16a34a">3h</div><div class="week-day-sub" style="color:#4ade80">출근전2h+통근1h</div></div>
+    <div class="week-day weekday"><div class="week-day-name">화</div><div class="week-day-h" style="color:#16a34a">3h</div><div class="week-day-sub" style="color:#4ade80">출근전2h+통근1h</div></div>
+    <div class="week-day weekday"><div class="week-day-name">수</div><div class="week-day-h" style="color:#16a34a">3h</div><div class="week-day-sub" style="color:#4ade80">출근전2h+통근1h</div></div>
+    <div class="week-day weekday"><div class="week-day-name">목</div><div class="week-day-h" style="color:#16a34a">3h</div><div class="week-day-sub" style="color:#4ade80">출근전2h+통근1h</div></div>
+    <div class="week-day rest"><div class="week-day-name">금</div><div class="week-day-h">휴식</div><div class="week-day-sub">회복일</div></div>
+    <div class="week-day weekend"><div class="week-day-name">토</div><div class="week-day-h" style="color:#2563eb">11h</div><div class="week-day-sub" style="color:#60a5fa">집중 공부</div></div>
+    <div class="week-day weekend"><div class="week-day-name">일</div><div class="week-day-h" style="color:#2563eb">11h</div><div class="week-day-sub" style="color:#60a5fa">집중 공부</div></div>
+  </div>
+
+  <div style="display:flex;gap:12px;margin-bottom:24px">
+    <div class="card-sm" style="flex:1;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:var(--text)">12h</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px">평일 합계 (출퇴근 포함)</div>
+    </div>
+    <div class="card-sm" style="flex:1;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:var(--text)">22h</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px">주말 합계</div>
+    </div>
+    <div class="card-sm" style="flex:1;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:#14b8a6">34h</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px">주당 총 공부 시간</div>
+    </div>
+    <div class="card-sm" style="flex:1;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:var(--text)">578h</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px">120일 총 가용 (최대)</div>
+    </div>
+  </div>
+
+  <div class="sect">평일 시간대별 활용법</div>
+  <div class="card" style="margin-bottom:16px">
+    <div style="font-weight:600;font-size:13px;color:var(--text);margin-bottom:12px">월~목 루틴</div>
+    <div class="time-block-row">
+      <div class="time-block commute">
+        <div class="tb-title">출근 전 2h</div>
+        <div class="tb-desc">새벽 기상 후 집중 공부<br><strong>Phase 1~2:</strong> 슈웨이저 읽기 + 모듈 퀴즈<br><strong>Phase 3:</strong> LES 문제풀이 + Ethics<br><strong>Phase 4:</strong> Final Review + 오답 정리</div>
+      </div>
+      <div class="time-block evening">
+        <div class="tb-title">출퇴근 1h</div>
+        <div class="tb-desc">이어폰 + 스마트폰으로 인강 청취<br>왕복 1h = 주당 4h 추가 확보<br>복습 없이 흘려들어도 OK</div>
+      </div>
+    </div>
+    <div class="alert alert-teal" style="margin-top:12px;font-size:12px">
+      <strong>합격수기 70%+의 공통 전략:</strong> 새벽 출근 전 2h 집중 공부 + 출퇴근 1h 인강 = 하루 3h. 일찍 일어나는 게 가장 확실한 직장인 합격 패턴입니다.
+    </div>
+  </div>
+
+  <div class="sect">주말 시간대별 활용법</div>
+  <div class="card">
+    <div style="font-weight:600;font-size:13px;color:var(--text);margin-bottom:12px">토 · 일 루틴 (각 11h)</div>
+    <div class="time-block-row">
+      <div class="time-block weekend-am">
+        <div class="tb-title">오전 4~5h (인강 집중)</div>
+        <div class="tb-desc">
+          <strong>Phase 1:</strong> FSA 인강 집중 (주말 전량 투입)<br>
+          <strong>Phase 2:</strong> 나머지 과목 인강<br>
+          <strong>Phase 3~4:</strong> Final Review
+        </div>
+      </div>
+      <div class="time-block weekend-pm">
+        <div class="tb-title">오후 5~6h (복습 + 문제)</div>
+        <div class="tb-desc">
+          <strong>Phase 1~2:</strong> 슈웨이저 정독 + 단권화<br>
+          <strong>Phase 3:</strong> LES 문제풀이 집중<br>
+          <strong>Phase 4:</strong> Mock 풀기 + 오답 분석
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px;font-size:12px">
+      <strong>주말 11h 꿀팁:</strong> 도서관·스터디카페 입장 = 마음가짐 전환. 중간 1시간 점심 + 10분 스트레칭 포함해서 계획을 짜면 지치지 않고 11h 채울 수 있습니다.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 체크리스트 ==================== -->
+<div id="page-checklist" class="page">
+  <div class="page-header">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+      <div>
+        <div class="page-title">체크리스트</div>
+        <div class="page-sub">클릭하면 완료 표시 · <strong style="color:#15803d">브라우저를 닫아도 기억합니다</strong> (localStorage 저장)</div>
+      </div>
+      <button onclick="resetChecks()" style="flex-shrink:0;padding:7px 14px;border-radius:6px;border:1px solid #fca5a5;background:#fef2f2;color:#b91c1c;font-size:12px;font-weight:600;cursor:pointer">전체 초기화</button>
+    </div>
+  </div>
+
+  <div class="tab-pills">
+    <div class="tab-pill active" onclick="switchTab('p1')">Phase 1 · 핵심 인강</div>
+    <div class="tab-pill" onclick="switchTab('p2')">Phase 2 · 나머지 인강</div>
+    <div class="tab-pill" onclick="switchTab('p3')">Phase 3 · Ethics + 문풀</div>
+    <div class="tab-pill" onclick="switchTab('p4')">Phase 4 · Final + Mock</div>
+  </div>
+
+  <div id="tab-p1" class="tab-content active">
+    <div class="check-section">
+      <div class="check-section-title">FSA 1회독 <span class="badge badge-red check-section-badge">Day 1~14 · 22h</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FSA 인강 수강 시작 (권오상 · 24교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">재무제표 3대 항목 (B/S, I/S, C/F) 흐름 이해</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">IFRS vs US GAAP 주요 차이점 정리노트 작성</span><span class="check-tag badge-teal">노트</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FSA 인강 1회독 완료</span><span class="check-tag badge-red">완료</span></div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">Fixed Income 인강 <span class="badge badge-red check-section-badge">Day 10~35 · 24h · 출퇴근 병행</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FI 인강 시작 (김종곤 · 26교시) — 출퇴근 인강으로 병행</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">채권 가격-금리 역관계 완전 이해</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Duration 3총사 (Macaulay / Modified / Money) 정리</span><span class="check-tag badge-teal">노트</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">YTM / Spot Rate / Forward Rate 구분 완료</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FI 인강 완료</span><span class="check-tag badge-red">완료</span></div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">FSA 2회독 <span class="badge badge-amber check-section-badge">Day 15~25 · +14h</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FSA 2회독 시작 — 이해 안된 부분 중심으로 빠르게</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">DTA / DTL (이연법인세) 반드시 이해하고 넘어가기</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FSA 슈웨이저 모듈 퀴즈 전량 풀기</span><span class="check-tag badge-teal">문제</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FSA 서브노트 (단권화) 초안 완성</span><span class="check-tag badge-teal">노트</span></div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">Equity 인강 <span class="badge badge-teal check-section-badge">Day 30~42 · 19h</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Equity 인강 수강 (유태인 · 21교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">DDM / GGM / FCF 가치평가 모델 계산 반복</span><span class="check-tag badge-amber">계산</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Market efficiency (weak / semi-strong / strong) 구분</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Equity 인강 완료 + 강의노트 활용한 복습</span><span class="check-tag badge-red">완료</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-p2" class="tab-content">
+    <div class="check-section">
+      <div class="check-section-title">Corporate Issuers <span class="badge badge-amber check-section-badge">Day 43~51 · 14h</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Corp 인강 수강 (지한송 · 15교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">WACC, NPV, IRR 계산 반복 숙달</span><span class="check-tag badge-amber">계산</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Corporate Governance 개념 정리 (테뱅에서 자주 출제)</span><span class="check-tag badge-teal">노트</span></div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">Derivatives <span class="badge badge-red check-section-badge">Day 50~60 · 14h · FI 직후 필수</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Derivatives 인강 수강 (박정준 · 15교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">선물 / 선도 / 스왑 / 옵션 4가지 구조 정확히 구분</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Put-Call Parity 이해 + 계산 연습</span><span class="check-tag badge-amber">계산</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Derivatives 핸드아웃 단권화</span><span class="check-tag badge-teal">노트</span></div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">AI + Quant + Portfolio + Economics <span class="badge badge-teal check-section-badge">Day 57~77</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">AI 인강 완료 (신우석 · 10교시) — Summary 노트로 단권화</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">AI 수수료 계산 문제 반복 연습</span><span class="check-tag badge-amber">계산</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Quant 인강 완료 (신우석 · 20교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">가설검정 / 회귀분석 흐름 이해 (깊이 파지 말 것)</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Portfolio 인강 완료 (김서호 · 11교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">CAL → CML → SML(CAPM) 흐름 이해</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Economics 인강 완료 (김형진 · 20교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">슈웨이저 1회독 FSA~Equity 완료</span><span class="check-tag badge-teal">슈웨이저</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-p3" class="tab-content">
+    <div class="check-section">
+      <div class="check-section-title">Ethics 집중 <span class="badge badge-red check-section-badge">Day 78~105 · 합격 당락 과목</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Ethics 인강 수강 (이규민 · 15교시)</span><span class="check-tag badge-red">인강</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Standard I~VII 규정 체계 암기 완료</span><span class="check-tag badge-amber">암기</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">고용주 vs 고객 vs 자기 의무 구분 정확히 이해</span><span class="check-tag badge-amber">개념</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">LES 에코시스템 Ethics 문제 전량 풀기</span><span class="check-tag badge-teal">문제</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Ethics 하루 10문제씩 꾸준히 유지</span><span class="check-tag badge-teal">문제</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">GIPS 핵심 개념 정리 (이규민 핸드아웃 활용)</span><span class="check-tag badge-teal">노트</span></div>
+      </div>
+    </div>
+    <div class="check-section">
+      <div class="check-section-title">슈웨이저 2회독 + 단권화 <span class="badge badge-teal check-section-badge">Day 78~105</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">FSA 슈웨이저 2회독 + 서브노트 최종 완성</span><span class="check-tag badge-red">슈웨이저</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Fixed Income 슈웨이저 3회독</span><span class="check-tag badge-red">슈웨이저</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">전 과목 슈웨이저 2회독 완료</span><span class="check-tag badge-teal">슈웨이저</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">LES 에코시스템 전 과목 Easy~Medium 풀기</span><span class="check-tag badge-teal">문제</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">자주 틀리는 개념 단권화 노트에 빨간펜으로 추가</span><span class="check-tag badge-teal">노트</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">약점 3개 과목 파악 → 해당 슈웨이저 집중 재독</span><span class="check-tag badge-amber">전략</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-p4" class="tab-content">
+    <div class="check-section">
+      <div class="check-section-title">Final Review + Mock <span class="badge badge-blue check-section-badge">Day 106~120</span></div>
+      <div class="check-items">
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Final Review 수강 시작 (김종곤 · 39교시 → 1.1배속 36h)</span><span class="check-tag badge-blue">Final</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Final Review 문제 모두 풀기 + 오답 분석</span><span class="check-tag badge-blue">문제</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">CFA 협회 Mock Exam 1회차 — 타이머 맞추고 실전처럼</span><span class="check-tag badge-red">Mock</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Mock 1 결과 분석 + 단권화 보강</span><span class="check-tag badge-amber">분석</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">CFA 협회 Mock Exam 2회차</span><span class="check-tag badge-red">Mock</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Mock 2 오답 분석 + 취약 개념 최종 정리</span><span class="check-tag badge-amber">분석</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">전 과목 단권화 노트 최종 1회독</span><span class="check-tag badge-teal">노트</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">Ethics 핸드아웃 (이규민) 최종 암기 점검</span><span class="check-tag badge-red">Ethics</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">시험 준비물 확인: 여권 유효기간, BA II+ 계산기, 리셋법 숙지</span><span class="check-tag badge-gray">준비</span></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-text">시험 시간대 확인 (09:00 AM 피하기 권장 — 출퇴근 혼잡)</span><span class="check-tag badge-gray">D-Day</span></div>
+      </div>
+    </div>
+    <div class="alert alert-teal" style="font-size:12px">
+      <strong>Mock 기준:</strong> 70%+ → 합격권. 60%대가 나와도 실제 시험이 더 쉽게 느껴진다는 수기 90%+. 점수에 너무 좌절하지 말고 오답 분석에 집중하세요.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 시작하기 전에 ==================== -->
+<div id="page-start" class="page">
+  <div class="page-header">
+    <div class="page-title">시작하기 전에</div>
+    <div class="page-sub">계산기 세팅 + 마음가짐</div>
+  </div>
+
+  <div class="rule70" style="margin-bottom:20px">
+    <div class="rule70-num" style="font-size:36px;line-height:1.1">BA II<br>PLUS</div>
+    <div class="rule70-body">
+      <div class="rule70-title">계산기 도착하면 포장 뜯자마자 — 소수점 9자리 세팅</div>
+      <div class="rule70-desc">
+        시험장에서 계산기를 리셋당해도 당황하지 않으려면,<br>
+        <strong>손가락이 무의식적으로 기억할 때까지</strong> 반복 연습해야 합니다.
+      </div>
+      <div class="cycle-row">
+        <div class="cycle-box" style="background:rgba(20,184,166,.3);color:#ccfbf1;font-size:14px">2nd</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box" style="background:rgba(20,184,166,.3);color:#ccfbf1;font-size:14px">FORMAT</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box" style="background:rgba(20,184,166,.3);color:#ccfbf1;font-size:14px">DEC = 9</div>
+        <div class="cycle-arrow">→</div>
+        <div class="cycle-box" style="background:rgba(20,184,166,.3);color:#ccfbf1;font-size:14px">ENTER</div>
+      </div>
+      <div class="rule70-tags" style="margin-top:14px">
+        <span class="rule70-tag rule70-tag-teal">도착하자마자 세팅</span>
+        <span class="rule70-tag rule70-tag-teal">손가락이 기억할 때까지</span>
+        <span class="rule70-tag rule70-tag-white">시험장 리셋 대비</span>
+        <span class="rule70-tag rule70-tag-white">TI BA II PLUS Professional</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">계산기 리셋 대비 — 시험장 세팅 순서 외워두기</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-light);border-radius:var(--radius-sm)">
+        <div style="width:24px;height:24px;border-radius:50%;background:#0f172a;color:var(--teal);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+        <div style="font-size:13px;color:var(--text)"><code style="background:#e2e8f0;padding:2px 7px;border-radius:4px;font-size:12px">2nd</code> 버튼 누르기</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-light);border-radius:var(--radius-sm)">
+        <div style="width:24px;height:24px;border-radius:50%;background:#0f172a;color:var(--teal);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+        <div style="font-size:13px;color:var(--text)"><code style="background:#e2e8f0;padding:2px 7px;border-radius:4px;font-size:12px">FORMAT</code> 버튼 누르기 (숫자 . 키)</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-light);border-radius:var(--radius-sm)">
+        <div style="width:24px;height:24px;border-radius:50%;background:#0f172a;color:var(--teal);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
+        <div style="font-size:13px;color:var(--text)">화면에 DEC 표시되면 <code style="background:#e2e8f0;padding:2px 7px;border-radius:4px;font-size:12px">9</code> 입력</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--gray-light);border-radius:var(--radius-sm)">
+        <div style="width:24px;height:24px;border-radius:50%;background:#0f172a;color:var(--teal);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">4</div>
+        <div style="font-size:13px;color:var(--text)"><code style="background:#e2e8f0;padding:2px 7px;border-radius:4px;font-size:12px">ENTER</code> → 완료. 화면에 9.000000000 표시되면 OK</div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px;font-size:12px">
+      <strong>왜 9자리?</strong> 채권 계산에서 소수점 자리가 부족하면 계산 오차가 생깁니다. 시험장에서 리셋 후 2자리로 돌아갔을 때 당황하지 않으려면 이 순서를 몸에 익혀두세요.
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-radius:var(--radius);padding:28px 28px 24px;border:1px solid rgba(20,184,166,.3)">
+    <div style="font-size:13px;font-weight:600;color:var(--teal);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px">오늘 새벽, 이것만 하면 됩니다</div>
+    <div style="font-size:11px;color:#64748b;margin-bottom:16px" id="today-date-label">날짜 로딩 중...</div>
+
+    <!-- 오늘 할 일 (일별 계획 연동) -->
+    <div id="today-tasks-container" style="margin-bottom:20px">
+      <div style="color:#64748b;font-size:13px">로딩 중...</div>
+    </div>
+
+    <!-- 고정 응원 메시지 -->
+    <div style="font-size:13px;color:#94a3b8;line-height:1.8;margin-bottom:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)">
+      업무와 일상의 무게를 짊어지고 새로운 도전을 시작한다는 것 자체가<br>
+      이미 <span style="color:#e2e8f0;font-weight:600">절반의 성공</span>입니다.<br>
+      남은 시간, 지치지 않고 완주하실 수 있도록 응원합니다.
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <div style="background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.4);border-radius:8px;padding:10px 16px;font-size:12px;font-weight:600;color:var(--teal)">완주 파이팅! 💪</div>
+      <button onclick="goPage2('daily');goPageMobile('daily')" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 16px;font-size:12px;color:#94a3b8;cursor:pointer">📅 일별 계획 전체 보기</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ==================== 공부 기록 ==================== -->
+<div id="page-tracker" class="page">
+  <div class="page-header">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>
+        <div class="page-title">공부 기록</div>
+        <div class="page-sub">매일 공부한 시간을 입력하면 주간 실적이 자동 계산됩니다</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="export-btn" onclick="exportStudyData()">📤 데이터 내보내기</button>
+        <button class="export-btn" onclick="importStudyData()">📥 데이터 가져오기</button>
+        <button onclick="resetTracker()" style="padding:8px 14px;border-radius:6px;border:1px solid #fca5a5;background:#fef2f2;color:#b91c1c;font-size:12px;font-weight:600;cursor:pointer">초기화</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tracker-summary">
+    <div class="ts-card"><div class="ts-val" id="ts-total">0h</div><div class="ts-lbl">총 누적 시간</div></div>
+    <div class="ts-card"><div class="ts-val" id="ts-this-week">0h</div><div class="ts-lbl">이번 주 실적</div></div>
+    <div class="ts-card"><div class="ts-val" id="ts-avg">0h</div><div class="ts-lbl">주간 평균 (공부일 기준)</div></div>
+    <div class="ts-card"><div class="ts-val" id="ts-days">0일</div><div class="ts-lbl">공부한 날 수</div></div>
+  </div>
+
+  <div id="tracker-container"></div>
+</div>
+
+<!-- ==================== 일별 강의 계획 ==================== -->
+<div id="page-daily" class="page">
+  <div class="page-header">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>
+        <div class="page-title">일별 강의 계획</div>
+        <div class="page-sub">4월 28일 ~ 8월 24일 · 118일 · 클릭하면 완료 표시 (저장됨)</div>
+      </div>
+      <button onclick="resetDaily()" style="flex-shrink:0;padding:7px 14px;border-radius:6px;border:1px solid #fca5a5;background:#fef2f2;color:#b91c1c;font-size:12px;font-weight:600;cursor:pointer">전체 초기화</button>
+    </div>
+  </div>
+
+  <div class="daily-progress">
+    <div class="dp-stat"><div class="dp-num" id="dp-done">0</div><div class="dp-lbl">완료 항목</div></div>
+    <div class="dp-stat"><div class="dp-num" id="dp-total">0</div><div class="dp-lbl">전체 항목</div></div>
+    <div class="dp-stat"><div class="dp-num" id="dp-pct">0%</div><div class="dp-lbl">진행률</div></div>
+    <div style="flex:1;min-width:120px">
+      <div class="prog-track" style="height:8px"><div class="prog-fill" id="dp-bar" style="width:0%;background:linear-gradient(90deg,#14b8a6,#3b82f6)"></div></div>
+    </div>
+  </div>
+
+  <div id="daily-plan-container">
+    <!-- JS로 렌더링 -->
+  </div>
+</div>
+
+<!-- ==================== 합격수기 인사이트 ==================== -->
+<div id="page-insights" class="page">
+  <div class="page-header">
+    <div class="page-title">합격수기 핵심 인사이트</div>
+    <div class="page-sub">63개 합격수기 분석 결과 · 근거 있는 데이터만</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px">공부법 언급 빈도</div>
+      <div class="insight-row"><span class="ins-label">슈웨이저 다회독 / 단권화</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:95%;background:#14b8a6"></div></div><span class="ins-pct">95%</span></div>
+      <div class="insight-row"><span class="ins-label">Mock Exam 필수</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:92%;background:#14b8a6"></div></div><span class="ins-pct">92%</span></div>
+      <div class="insight-row"><span class="ins-label">서브노트 / 요약노트 작성</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:85%;background:#3b82f6"></div></div><span class="ins-pct">85%</span></div>
+      <div class="insight-row"><span class="ins-label">Ethics 마지막 집중</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:78%;background:#3b82f6"></div></div><span class="ins-pct">78%</span></div>
+      <div class="insight-row"><span class="ins-label">출퇴근 인강 활용</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:70%;background:#8b5cf6"></div></div><span class="ins-pct">70%</span></div>
+      <div class="insight-row"><span class="ins-label">FSA / FI 먼저</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:72%;background:#8b5cf6"></div></div><span class="ins-pct">72%</span></div>
+      <div class="insight-row"><span class="ins-label">개념 이해 > 계산 암기</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:88%;background:#14b8a6"></div></div><span class="ins-pct">88%</span></div>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px">직장인 합격자 평일 공부 시간</div>
+      <div class="insight-row"><span class="ins-label">1~2시간</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:58%;background:#22c55e"></div></div><span class="ins-pct">58%</span></div>
+      <div class="insight-row"><span class="ins-label">2~3시간</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:32%;background:#3b82f6"></div></div><span class="ins-pct">32%</span></div>
+      <div class="insight-row"><span class="ins-label">3시간 이상</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:10%;background:#f59e0b"></div></div><span class="ins-pct">10%</span></div>
+      <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">직장인 합격자 주말 공부 시간</div>
+      <div class="insight-row"><span class="ins-label">5~8시간</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:55%;background:#22c55e"></div></div><span class="ins-pct">55%</span></div>
+      <div class="insight-row"><span class="ins-label">8~12시간</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:35%;background:#3b82f6"></div></div><span class="ins-pct">35%</span></div>
+      <div class="insight-row"><span class="ins-label">12시간 이상</span><div class="ins-bar-wrap"><div class="ins-bar-fill" style="width:10%;background:#f59e0b"></div></div><span class="ins-pct">10%</span></div>
+    </div>
+  </div>
+
+  <div class="sect">수기에서 직접 인용한 핵심 조언</div>
+  <div class="grid2">
+    <div class="card-sm" style="border-left:3px solid var(--teal)">
+      <div style="font-size:12px;font-weight:600;color:var(--teal-dark);margin-bottom:5px">슈웨이저 다회독</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6">"슈웨이저 3회독 이상 하면 시험장에서 당황할 일이 없었다." "왜 슈웨이저를 꼼꼼하게 보라는지 시험을 보고나서야 이해했다."</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid var(--red)">
+      <div style="font-size:12px;font-weight:600;color:#991b1b;margin-bottom:5px">Ethics 마지막</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6">"Ethics는 휘발성이 너무 강해 일찍 공부해봤자 시험 때 다 잊는다." "시험 1달 반 전에 집중했더니 훨씬 효과적이었다."</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid var(--blue)">
+      <div style="font-size:12px;font-weight:600;color:#1d4ed8;margin-bottom:5px">실제 시험 난이도</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6">"테스트뱅크·Mock보다 실제 시험이 훨씬 쉬웠다." "허무할 정도로 쉬웠는데 결과 나올 때까지 불안했다."</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid var(--amber)">
+      <div style="font-size:12px;font-weight:600;color:#92400e;margin-bottom:5px">직장인 공부법</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6">"출퇴근 인강이 핵심. 지하철 때 열심히 들었다." "쫓기듯 3.5h 하는 것보다 2h 꾸준히가 훨씬 낫다."</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid var(--green)">
+      <div style="font-size:12px;font-weight:600;color:#15803d;margin-bottom:5px">AI 가성비</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6">"AI(대체투자)는 63개 수기 모두 가성비 최강." "홍지웅/신우석 서브노트만 봐도 고득점 가능."</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid #8b5cf6">
+      <div style="font-size:12px;font-weight:600;color:#6d28d9;margin-bottom:5px">시험 당일</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6">"9AM은 출퇴근 혼잡으로 비추천." "세션 중간 30분 — 단권화 노트 보는 사람이 많았고 효과 좋았다."</div>
+    </div>
+  </div>
+
+  <div class="sect">과목별 난이도 / 가성비 평가</div>
+  <div class="card">
+    <div style="overflow-x:auto"><table style="width:100%;font-size:12px;border-collapse:collapse;min-width:500px">
+      <thead><tr style="border-bottom:1px solid var(--border)">
+        <th style="text-align:left;padding:7px 0;color:var(--text3);font-weight:600">과목</th>
+        <th style="text-align:center;padding:7px 0;color:var(--text3);font-weight:600">시험 비중</th>
+        <th style="text-align:center;padding:7px 0;color:var(--text3);font-weight:600">난이도</th>
+        <th style="text-align:center;padding:7px 0;color:var(--text3);font-weight:600">가성비</th>
+        <th style="text-align:left;padding:7px 0;color:var(--text3);font-weight:600">합격수기 공통 의견</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">FSA</td><td style="text-align:center"><span class="badge badge-red">11~14%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">인강 1~2회독 권장. 슈웨이저 다회독이 핵심. 공부한 만큼 나온다</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Fixed Income</td><td style="text-align:center"><span class="badge badge-red">11~14%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">가장 어렵지만 정직한 과목. 슈웨이저 3회독 권장</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Ethics</td><td style="text-align:center"><span class="badge badge-red">15~20%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">비중 최고(15~20%). 암기보다 문제풀이 위주. 합격 당락 과목</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Equity</td><td style="text-align:center"><span class="badge badge-red">11~14%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">강의노트 잘 돼 있음. 계산문제 반복하면 고득점 가능</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Derivatives</td><td style="text-align:center"><span class="badge badge-amber">5~8%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#f97316;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">내용 어렵지만 시험은 평이. 강의노트 중심으로 이해</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">AI</td><td style="text-align:center"><span class="badge badge-amber">7~10%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#14b8a6;margin:1px"></span></div></td><td style="color:var(--text2)">가성비 최강! Summary 노트만으로 고득점 가능</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Portfolio</td><td style="text-align:center"><span class="badge badge-amber">8~12%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">CAPM·SML 이해가 핵심. 쉬워 보이지만 방심 금물</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Corporate</td><td style="text-align:center"><span class="badge badge-teal">6~9%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#6366f1;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#22c55e;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">어렵지 않음. 일주일이면 완료. WACC·NPV 계산 연습</td></tr>
+        <tr style="border-bottom:1px solid #f8fafc"><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Quant</td><td style="text-align:center"><span class="badge badge-teal">6~9%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">시험은 평이. 가성비 낮으니 깊이 파지 말 것</td></tr>
+        <tr><td style="padding:7px 0;font-weight:600;position:sticky;left:0;background:white;z-index:1;min-width:80px;color:#0f172a">Economics</td><td style="text-align:center"><span class="badge badge-gray">6~9%</span></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#eab308;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="text-align:center;padding:4px 0"><div style="display:flex;justify-content:center;gap:2px;align-items:center"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#ef4444;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#e2e8f0;margin:1px"></span></div></td><td style="color:var(--text2)">양 많고 비중 낮음. 가성비 최하. 슈웨이저 1회독 + 존버</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- end main -->
+</div><!-- end shell -->
+
+<script>
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.querySelector('.sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+function goPageMobile(id) {
+  goPage2(id);
+  // update bottom nav
+  document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+  const pageMap = ['start','overview','subjects','lectures','schedule','checklist','tracker','daily','insights'];
+  const idx = pageMap.indexOf(id);
+  const btns = document.querySelectorAll('.bottom-nav-item');
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+  closeSidebar();
+}
+function goPage(id) {
+  goPage2(id);
+  // update bottom nav
+  document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+  const pageMap = ['start','overview','subjects','lectures','schedule','checklist','tracker','daily','insights'];
+  const idx = pageMap.indexOf(id);
+  const btns = document.querySelectorAll('.bottom-nav-item');
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+  closeSidebar();
+}
+function goPage2(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const navItem = document.querySelector('.nav-item[onclick*="' + id + '"]');
+  if (navItem) navItem.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  saveChecks();
+}
+
+function saveChecks() {
+  const items = document.querySelectorAll('.check-item');
+  const state = {};
+  items.forEach((item, i) => {
+    state['check_' + i] = item.classList.contains('done');
+  });
+  try { localStorage.setItem('cfa_checklist', JSON.stringify(state)); } catch(e) {}
+  scheduleGistSave();
+}
+
+function loadChecks() {
+  try {
+    const saved = localStorage.getItem('cfa_checklist');
+    if (!saved) return;
+    const state = JSON.parse(saved);
+    const items = document.querySelectorAll('.check-item');
+    items.forEach((item, i) => {
+      if (state['check_' + i]) item.classList.add('done');
+    });
+  } catch(e) {}
+}
+
+function resetChecks() {
+  if (!confirm('체크리스트를 전부 초기화할까요?')) return;
+  document.querySelectorAll('.check-item').forEach(item => item.classList.remove('done'));
+  try { localStorage.removeItem('cfa_checklist'); } catch(e) {}
+}
+
+
+// ===== 일별 강의 계획 데이터 =====
+const ph = {
+  1: {label:'Phase 1', color:'#ef4444'},
+  2: {label:'Phase 2', color:'#f59e0b'},
+  3: {label:'Phase 3', color:'#14b8a6'},
+  4: {label:'Phase 4', color:'#3b82f6'}
+};
+
+const dailyPlan = [
+// ── Week 1 (Apr 28 ~ May 3) ──
+{w:1, wr:'4/27~5/3', date:'4/27', dow:'월', p:1, h:3, tasks:['📚 합격수기 읽기 및 학습 전략 파악 — 공부 방향 설정','CFA Level 1 커리큘럼 훑어보기 + 강의 수강 순서 확인']}, // 4/27 사전 준비의 날
+{w:1, wr:'4/27~5/3', date:'4/28', dow:'화', p:1, h:3, tasks:['📋 공부 계획 확인 및 정리 — 이 플래너 전체 한 번 훑어보기','⚙️ 계산기 세팅: 2nd → FORMAT → 9 → ENTER 반복 연습 (강의는 내일부터 시작!)']}, // 4/28 계획의 날
+{w:1, wr:'4/27~5/3', date:'4/29', dow:'수', p:1, h:3, tasks:['[📺 인강] FSA 1~2강 (권오상) — 재무제표 개요·구조 🚀 강의 시작!','슈웨이저 FSA — 재무제표 3대 항목 흐름 파악']},
+{w:1, wr:'4/27~5/3', date:'4/30', dow:'목', p:1, h:3, tasks:['[📺 인강] FSA 3~4강 — Income Statement','슈웨이저 FSA Ch.1 모듈퀴즈 풀어보기']},
+{w:1, wr:'4/27~5/3', date:'5/1', dow:'금', p:1, h:0, rest:true, tasks:['🔴 휴식일 — 오늘은 쉬세요']},
+{w:1, wr:'4/27~5/3', date:'5/2', dow:'토', p:1, h:11, tasks:['[📺 인강] FSA 6~10강 (5강) — Cash Flow · Inventory · PP&E','슈웨이저 FSA Ch.3~5 정독 + 서브노트 작성 시작']},
+{w:1, wr:'4/27~5/3', date:'5/3', dow:'일', p:1, h:11, tasks:['[📺 인강] FSA 11~15강 (5강) — Long-term Liabilities · Tax','슈웨이저 FSA Ch.6~8 정독 + 모듈퀴즈']},
+// ── Week 2 (May 4~10) FSA 완료 ──
+{w:2, wr:'5/4~5/10', date:'5/4', dow:'월', p:1, h:3, tasks:['[📺 인강] FSA 16~17강 — Financial Reporting Quality','슈웨이저 FSA Ch.9 정독']},
+{w:2, wr:'5/4~5/10', date:'5/5', dow:'화', p:1, h:3, tasks:['[📺 인강] FSA 18~19강 — Analysis Framework','슈웨이저 FSA Ch.10 정독']},
+{w:2, wr:'5/4~5/10', date:'5/6', dow:'수', p:1, h:3, tasks:['[📺 인강] FSA 20~21강 — Financial Statement Analysis','FSA 서브노트 중간 정리']},
+{w:2, wr:'5/4~5/10', date:'5/7', dow:'목', p:1, h:3, tasks:['[📺 인강] FSA 22~24강 완료 🎉','FSA IFRS vs US GAAP 차이점 표로 정리']},
+{w:2, wr:'5/4~5/10', date:'5/8', dow:'금', p:1, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:2, wr:'5/4~5/10', date:'5/9', dow:'토', p:1, h:11, tasks:['[📺 인강] FSA 2회독 1~12강 (이해 안 된 부분 집중 재수강)','FSA 슈웨이저 전체 재독 + 단권화 노트 보강']},
+{w:2, wr:'5/4~5/10', date:'5/10', dow:'일', p:1, h:11, tasks:['[📺 인강] FSA 2회독 13~24강 완료 🎉','FSA 모듈퀴즈 전량 풀기 + 오답 노트 작성']},
+// ── Week 3 (May 11~17) FI 시작 ──
+{w:3, wr:'5/11~5/17', date:'5/11', dow:'월', p:1, h:3, tasks:['FSA 서브노트 최종 완성 + 핵심 공식 암기','[📺 인강] FI 1강 (김종곤) — 채권 기초 (출퇴근)']},
+{w:3, wr:'5/11~5/17', date:'5/12', dow:'화', p:1, h:3, tasks:['[📺 인강] FI 2~3강 — 채권 가격·수익률 역관계','슈웨이저 FI Ch.1 정독']},
+{w:3, wr:'5/11~5/17', date:'5/13', dow:'수', p:1, h:3, tasks:['[📺 인강] FI 4~5강 — YTM · Spot Rate','슈웨이저 FI Ch.2 정독']},
+{w:3, wr:'5/11~5/17', date:'5/14', dow:'목', p:1, h:3, tasks:['[📺 인강] FI 6~7강 — Forward Rate','슈웨이저 FI Ch.3 정독']},
+{w:3, wr:'5/11~5/17', date:'5/15', dow:'금', p:1, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:3, wr:'5/11~5/17', date:'5/16', dow:'토', p:1, h:11, tasks:['[📺 인강] FI 8~12강 (5강) — Duration · Convexity','슈웨이저 FI Ch.4~6 정독 + Duration 공식 암기']},
+{w:3, wr:'5/11~5/17', date:'5/17', dow:'일', p:1, h:11, tasks:['[📺 인강] FI 13~17강 (5강) — Credit Risk · Spread','슈웨이저 FI Ch.7~9 정독 + 모듈퀴즈']},
+// ── Week 4 (May 18~24) FI 완료 ──
+{w:4, wr:'5/18~5/24', date:'5/18', dow:'월', p:1, h:3, tasks:['[📺 인강] FI 18~19강 — ABS · MBS 구조','슈웨이저 FI Ch.10 정독']},
+{w:4, wr:'5/18~5/24', date:'5/19', dow:'화', p:1, h:3, tasks:['[📺 인강] FI 20~21강 — Structured Products','슈웨이저 FI Ch.11 정독']},
+{w:4, wr:'5/18~5/24', date:'5/20', dow:'수', p:1, h:3, tasks:['[📺 인강] FI 22~23강 — Term Structure','슈웨이저 FI Ch.12 정독']},
+{w:4, wr:'5/18~5/24', date:'5/21', dow:'목', p:1, h:3, tasks:['[📺 인강] FI 24~26강 완료 🎉','FI 서브노트 완성 + Duration·Spread 핵심 공식 총정리']},
+{w:4, wr:'5/18~5/24', date:'5/22', dow:'금', p:1, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:4, wr:'5/18~5/24', date:'5/23', dow:'토', p:1, h:11, tasks:['FI 슈웨이저 2회독 (전체) + 단권화 완성','FI LES 에코시스템 문제 50문제 시작']},
+{w:4, wr:'5/18~5/24', date:'5/24', dow:'일', p:1, h:11, tasks:['FI 슈웨이저 3회독 핵심파트 + 오답 정리','[📺 인강] Equity 1~3강 (유태인) 시작']},
+// ── Week 5 (May 25~31) Equity ──
+{w:5, wr:'5/25~5/31', date:'5/25', dow:'월', p:1, h:3, tasks:['[📺 인강] Equity 4~5강 — Market Efficiency','슈웨이저 Equity Ch.1 정독']},
+{w:5, wr:'5/25~5/31', date:'5/26', dow:'화', p:1, h:3, tasks:['[📺 인강] Equity 6~7강 — Security Analysis','슈웨이저 Equity Ch.2 정독']},
+{w:5, wr:'5/25~5/31', date:'5/27', dow:'수', p:1, h:3, tasks:['[📺 인강] Equity 8~9강 — Industry Analysis','슈웨이저 Equity Ch.3 정독']},
+{w:5, wr:'5/25~5/31', date:'5/28', dow:'목', p:1, h:3, tasks:['[📺 인강] Equity 10~11강 — DDM · GGM 가치평가','DDM · GGM 계산 반복 연습 (계산기 활용)']},
+{w:5, wr:'5/25~5/31', date:'5/29', dow:'금', p:1, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:5, wr:'5/25~5/31', date:'5/30', dow:'토', p:1, h:11, tasks:['[📺 인강] Equity 12~16강 (5강) — FCF · Multiples','슈웨이저 Equity Ch.4~6 정독 + 서브노트']},
+{w:5, wr:'5/25~5/31', date:'5/31', dow:'일', p:1, h:11, tasks:['[📺 인강] Equity 17~21강 완료 🎉','슈웨이저 Equity 전체 + LES 문제 30문제']},
+// ── Week 6 (Jun 1~7) Phase 2: Corp ──
+{w:6, wr:'6/1~6/7', date:'6/1', dow:'월', p:2, h:3, tasks:['[📺 인강] Corporate 1~2강 (지한송) — 기업재무 개요·자본구조','슈웨이저 Corp Ch.1 정독']},
+{w:6, wr:'6/1~6/7', date:'6/2', dow:'화', p:2, h:3, tasks:['[📺 인강] Corporate 3~4강 — WACC','WACC 계산 반복 연습']},
+{w:6, wr:'6/1~6/7', date:'6/3', dow:'수', p:2, h:3, tasks:['[📺 인강] Corporate 5~6강 — Capital Budgeting (NPV·IRR)','NPV · IRR 계산 연습']},
+{w:6, wr:'6/1~6/7', date:'6/4', dow:'목', p:2, h:3, tasks:['[📺 인강] Corporate 7~8강 — Leverage · Dividend','슈웨이저 Corp Ch.2~3 정독']},
+{w:6, wr:'6/1~6/7', date:'6/5', dow:'금', p:2, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:6, wr:'6/1~6/7', date:'6/6', dow:'토', p:2, h:11, tasks:['[📺 인강] Corporate 9~13강 (5강) — Governance','슈웨이저 Corp Ch.4~6 + Corporate Governance 집중 정리']},
+{w:6, wr:'6/1~6/7', date:'6/7', dow:'일', p:2, h:11, tasks:['[📺 인강] Corporate 14~15강 완료 🎉 + Derivatives 1~4강 시작 (박정준)','Corp 서브노트 완성 + 슈웨이저 모듈퀴즈']},
+// ── Week 7 (Jun 8~14) Derivatives ──
+{w:7, wr:'6/8~6/14', date:'6/8', dow:'월', p:2, h:3, tasks:['[📺 인강] Derivatives 5~6강 — 선물·선도 개요','슈웨이저 Deriv Ch.1 정독']},
+{w:7, wr:'6/8~6/14', date:'6/9', dow:'화', p:2, h:3, tasks:['[📺 인강] Derivatives 7~8강 — Forward Pricing','슈웨이저 Deriv Ch.2 정독']},
+{w:7, wr:'6/8~6/14', date:'6/10', dow:'수', p:2, h:3, tasks:['[📺 인강] Derivatives 9~10강 — Futures · Swaps','스왑 구조 정리 (수기에서 가장 어렵다고 한 파트 — 70% 이해면 넘어가기)']},
+{w:7, wr:'6/8~6/14', date:'6/11', dow:'목', p:2, h:3, tasks:['[📺 인강] Derivatives 11~12강 — Options 기초','Put-Call Parity 이해 + 계산 연습']},
+{w:7, wr:'6/8~6/14', date:'6/12', dow:'금', p:2, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:7, wr:'6/8~6/14', date:'6/13', dow:'토', p:2, h:11, tasks:['[📺 인강] Derivatives 13~15강 완료 🎉','슈웨이저 Deriv 전체 정독 + 서브노트 + [📺 인강] AI 1~4강 시작 (신우석)']},
+{w:7, wr:'6/8~6/14', date:'6/14', dow:'일', p:2, h:11, tasks:['[📺 인강] AI 5~10강 완료 🎉','슈웨이저 AI 전체 + Summary 노트 활용 + LES 문제']},
+// ── Week 8 (Jun 15~21) Quant ──
+{w:8, wr:'6/15~6/21', date:'6/15', dow:'월', p:2, h:3, tasks:['[📺 인강] Quant 1~2강 (신우석) — 기초통계·확률','슈웨이저 Quant Ch.1 정독']},
+{w:8, wr:'6/15~6/21', date:'6/16', dow:'화', p:2, h:3, tasks:['[📺 인강] Quant 3~4강 — 분포·표본','슈웨이저 Quant Ch.2 정독']},
+{w:8, wr:'6/15~6/21', date:'6/17', dow:'수', p:2, h:3, tasks:['[📺 인강] Quant 5~6강 — 가설검정','슈웨이저 Quant Ch.3 정독']},
+{w:8, wr:'6/15~6/21', date:'6/18', dow:'목', p:2, h:3, tasks:['[📺 인강] Quant 7~8강 — 신뢰구간·t검정','슈웨이저 Quant Ch.4 정독']},
+{w:8, wr:'6/15~6/21', date:'6/19', dow:'금', p:2, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:8, wr:'6/15~6/21', date:'6/20', dow:'토', p:2, h:11, tasks:['[📺 인강] Quant 9~13강 (5강) — 회귀분석','슈웨이저 Quant Ch.5~7 정독 + 서브노트']},
+{w:8, wr:'6/15~6/21', date:'6/21', dow:'일', p:2, h:11, tasks:['[📺 인강] Quant 14~18강 (5강)','슈웨이저 Quant Ch.8~9 + 모듈퀴즈']},
+// ── Week 9 (Jun 22~28) Quant 완료 + Portfolio + Econ ──
+{w:9, wr:'6/22~6/28', date:'6/22', dow:'월', p:2, h:3, tasks:['[📺 인강] Quant 19~20강 완료 🎉','Quant 서브노트 완성']},
+{w:9, wr:'6/22~6/28', date:'6/23', dow:'화', p:2, h:3, tasks:['[📺 인강] Portfolio 1~2강 (김서호) — 포트폴리오 기초','슈웨이저 PM Ch.1 정독']},
+{w:9, wr:'6/22~6/28', date:'6/24', dow:'수', p:2, h:3, tasks:['[📺 인강] Portfolio 3~4강 — CAL · CML','CAL/CML/SML 흐름 정리']},
+{w:9, wr:'6/22~6/28', date:'6/25', dow:'목', p:2, h:3, tasks:['[📺 인강] Portfolio 5~6강 — CAPM · SML','CAPM 계산 반복 연습']},
+{w:9, wr:'6/22~6/28', date:'6/26', dow:'금', p:2, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:9, wr:'6/22~6/28', date:'6/27', dow:'토', p:2, h:11, tasks:['[📺 인강] Portfolio 7~11강 완료 🎉 + Economics 1~5강 시작 (김형진)','슈웨이저 PM 전체 + 서브노트']},
+{w:9, wr:'6/22~6/28', date:'6/28', dow:'일', p:2, h:11, tasks:['[📺 인강] Economics 6~12강 — 미시경제 심화','슈웨이저 Econ Ch.1~4 정독']},
+// ── Week 10 (Jun 29~Jul 5) Econ 완료 + 슈웨이저 총복습 ──
+{w:10, wr:'6/29~7/5', date:'6/29', dow:'월', p:2, h:3, tasks:['[📺 인강] Economics 13~16강 — 거시경제·통화정책','슈웨이저 Econ Ch.5~6 정독']},
+{w:10, wr:'6/29~7/5', date:'6/30', dow:'화', p:2, h:3, tasks:['[📺 인강] Economics 17~20강 완료 🎉 — 환율·국제무역','슈웨이저 Econ Ch.7 + 단권화']},
+{w:10, wr:'6/29~7/5', date:'7/1', dow:'수', p:2, h:3, tasks:['FSA 슈웨이저 핵심 재독 (IFRS vs GAAP 집중)','FSA LES 에코시스템 문제 30문제']},
+{w:10, wr:'6/29~7/5', date:'7/2', dow:'목', p:2, h:3, tasks:['FI 슈웨이저 핵심 재독 (Duration·Spread 집중)','FI LES 문제 30문제']},
+{w:10, wr:'6/29~7/5', date:'7/3', dow:'금', p:2, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:10, wr:'6/29~7/5', date:'7/4', dow:'토', p:2, h:11, tasks:['Equity + Corp 슈웨이저 재독 + LES 문제','Deriv + AI 슈웨이저 재독 + LES 문제']},
+{w:10, wr:'6/29~7/5', date:'7/5', dow:'일', p:2, h:11, tasks:['Quant + Portfolio + Econ 슈웨이저 재독 + LES 문제','전과목 단권화 노트 현황 점검']},
+// ── Week 11 (Jul 6~12) Phase 3: Ethics 시작 ──
+{w:11, wr:'7/6~7/12', date:'7/6', dow:'월', p:3, h:3, tasks:['[📺 인강] Ethics 1~2강 (이규민) — Code of Ethics · Standard I','Ethics Standard I 규정 암기 시작']},
+{w:11, wr:'7/6~7/12', date:'7/7', dow:'화', p:3, h:3, tasks:['[📺 인강] Ethics 3~4강 — Standard II · III','Ethics Standard II~III 암기 + 케이스 분석']},
+{w:11, wr:'7/6~7/12', date:'7/8', dow:'수', p:3, h:3, tasks:['[📺 인강] Ethics 5~6강 — Standard IV · V','Ethics Standard IV~V 암기']},
+{w:11, wr:'7/6~7/12', date:'7/9', dow:'목', p:3, h:3, tasks:['[📺 인강] Ethics 7~8강 — Standard VI · VII','Ethics Standard VI~VII 암기']},
+{w:11, wr:'7/6~7/12', date:'7/10', dow:'금', p:3, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:11, wr:'7/6~7/12', date:'7/11', dow:'토', p:3, h:11, tasks:['[📺 인강] Ethics 9~12강 — GIPS · AMC','Ethics LES 문제 50문제 + 오답 분석']},
+{w:11, wr:'7/6~7/12', date:'7/12', dow:'일', p:3, h:11, tasks:['[📺 인강] Ethics 13~15강 완료 🎉','Ethics 슈웨이저 전체 + Standard I~VII 최종 암기 점검']},
+// ── Week 12 (Jul 13~19) Ethics 문제풀이 + 슈웨이저 마무리 ──
+{w:12, wr:'7/13~7/19', date:'7/13', dow:'월', p:3, h:3, tasks:['Ethics LES 문제 30문제 (매일 10문제 습관화)','FSA 슈웨이저 최종 회독']},
+{w:12, wr:'7/13~7/19', date:'7/14', dow:'화', p:3, h:3, tasks:['Ethics LES 문제 30문제','FI 슈웨이저 최종 회독 (3회독 달성 목표)']},
+{w:12, wr:'7/13~7/19', date:'7/15', dow:'수', p:3, h:3, tasks:['Ethics LES 문제 30문제','Equity 슈웨이저 최종 + 단권화 완성']},
+{w:12, wr:'7/13~7/19', date:'7/16', dow:'목', p:3, h:3, tasks:['Ethics LES 문제 30문제','Corp + Deriv 슈웨이저 최종 + 단권화']},
+{w:12, wr:'7/13~7/19', date:'7/17', dow:'금', p:3, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:12, wr:'7/13~7/19', date:'7/18', dow:'토', p:3, h:11, tasks:['FSA + FI LES 문제 집중 (각 50문제 이상)','오답 분석 + 단권화 노트 보강']},
+{w:12, wr:'7/13~7/19', date:'7/19', dow:'일', p:3, h:11, tasks:['Equity + Corp + Deriv LES 문제 집중 (각 30문제)','AI + Quant + Portfolio + Econ LES 문제']},
+// ── Week 13 (Jul 20~26) 단권화 완성 + 집중 문제풀이 ──
+{w:13, wr:'7/20~7/26', date:'7/20', dow:'월', p:3, h:3, tasks:['Ethics 10문제 + 약점 과목 슈웨이저 재독','단권화 노트 FSA 파트 최종 점검']},
+{w:13, wr:'7/20~7/26', date:'7/21', dow:'화', p:3, h:3, tasks:['Ethics 10문제 + FI 약점 파트 재독','단권화 노트 FI 파트 최종 점검']},
+{w:13, wr:'7/20~7/26', date:'7/22', dow:'수', p:3, h:3, tasks:['Ethics 10문제 + Equity 약점 파트','단권화 노트 나머지 과목 점검']},
+{w:13, wr:'7/20~7/26', date:'7/23', dow:'목', p:3, h:3, tasks:['Ethics 10문제 + 전과목 핵심 공식 암기 점검','오답노트 전체 1회독']},
+{w:13, wr:'7/20~7/26', date:'7/24', dow:'금', p:3, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:13, wr:'7/20~7/26', date:'7/25', dow:'토', p:3, h:11, tasks:['전과목 단권화 노트 완성 + LES 오답 재풀이','Ethics 집중 — 문제 30문제 + Standard 재암기']},
+{w:13, wr:'7/20~7/26', date:'7/26', dow:'일', p:3, h:11, tasks:['단권화 노트 전체 1회독 (시험 직전 버전으로 정리)','LES 오답 총복습']},
+// ── Week 14 (Jul 27~Aug 2) 슈웨이저 최종 ──
+{w:14, wr:'7/27~8/2', date:'7/27', dow:'월', p:3, h:3, tasks:['Ethics 10문제 + FSA 약점 슈웨이저 재독','단권화 노트 최종 업데이트']},
+{w:14, wr:'7/27~8/2', date:'7/28', dow:'화', p:3, h:3, tasks:['Ethics 10문제 + FI 약점 슈웨이저 재독','핵심 계산 공식 암기 점검']},
+{w:14, wr:'7/27~8/2', date:'7/29', dow:'수', p:3, h:3, tasks:['Ethics 10문제 + 기타 약점 과목 최종 점검','오답노트 핵심만 추려 정리']},
+{w:14, wr:'7/27~8/2', date:'7/30', dow:'목', p:3, h:3, tasks:['Ethics 10문제 + 전과목 단권화 노트 빠른 1회독','Final Review 준비 완료 점검']},
+{w:14, wr:'7/27~8/2', date:'7/31', dow:'금', p:3, h:0, rest:true, tasks:['🔴 휴식일 — Phase 3 수고하셨어요!']},
+{w:14, wr:'7/27~8/2', date:'8/1', dow:'토', p:3, h:11, tasks:['LES 오답 전체 총복습 + Ethics 문제 20문제','단권화 노트 전체 빠른 1회독']},
+{w:14, wr:'7/27~8/2', date:'8/2', dow:'일', p:3, h:11, tasks:['전과목 핵심 개념 최종 점검','Mock Exam 전 마지막 자신감 점검']},
+// ── Week 15 (Aug 3~9) Phase 4: Final Review ──
+{w:15, wr:'8/3~8/9', date:'8/3', dow:'월', p:4, h:3, tasks:['[📺 Final Review] FR 1~2강 (김종곤)','FR 문제 풀기 + 오답 단권화']},
+{w:15, wr:'8/3~8/9', date:'8/4', dow:'화', p:4, h:3, tasks:['[📺 Final Review] FR 3~4강','FR 문제 풀기 + 오답 단권화']},
+{w:15, wr:'8/3~8/9', date:'8/5', dow:'수', p:4, h:3, tasks:['[📺 Final Review] FR 5~6강','FR 문제 풀기 + 오답 단권화']},
+{w:15, wr:'8/3~8/9', date:'8/6', dow:'목', p:4, h:3, tasks:['[📺 Final Review] FR 7~8강','FR 문제 풀기 + 오답 단권화']},
+{w:15, wr:'8/3~8/9', date:'8/7', dow:'금', p:4, h:0, rest:true, tasks:['🔴 휴식일']},
+{w:15, wr:'8/3~8/9', date:'8/8', dow:'토', p:4, h:11, tasks:['[📺 Final Review] FR 9~18강 (주말 집중 10강)','FR 문제 전량 풀기 + 오답 분석']},
+{w:15, wr:'8/3~8/9', date:'8/9', dow:'일', p:4, h:11, tasks:['[📺 Final Review] FR 19~28강 (10강)','FR 문제 전량 + 단권화 최종 보강']},
+// ── Week 16 (Aug 10~16) Final Review 완료 + Mock ──
+{w:16, wr:'8/10~8/16', date:'8/10', dow:'월', p:4, h:3, tasks:['[📺 Final Review] FR 29~31강','FR 문제 풀기']},
+{w:16, wr:'8/10~8/16', date:'8/11', dow:'화', p:4, h:3, tasks:['[📺 Final Review] FR 32~34강','FR 문제 풀기']},
+{w:16, wr:'8/10~8/16', date:'8/12', dow:'수', p:4, h:3, tasks:['[📺 Final Review] FR 35~37강','FR 문제 풀기']},
+{w:16, wr:'8/10~8/16', date:'8/13', dow:'목', p:4, h:3, tasks:['[📺 Final Review] FR 38~39강 완료 🎉','FR 전체 오답 최종 정리']},
+{w:16, wr:'8/10~8/16', date:'8/14', dow:'금', p:4, h:0, rest:true, tasks:['🔴 휴식일 — Mock 전날 충분히 쉬세요']},
+{w:16, wr:'8/10~8/16', date:'8/15', dow:'토', p:4, h:11, tasks:['🎯 Mock Exam 1회차 (CFA 협회 무료 — 4.5h, 실전처럼)','Mock 1 전체 오답 분석 + 단권화 보강 (6h)']},
+{w:16, wr:'8/10~8/16', date:'8/16', dow:'일', p:4, h:11, tasks:['🎯 Mock Exam 2회차 (CFA 협회 무료 — 4.5h, 실전처럼)','Mock 2 오답 분석 + 취약 개념 최종 정리 (6h)']},
+// ── Week 17 (Aug 17~23) 최종 마무리 ──
+{w:17, wr:'8/17~8/23', date:'8/17', dow:'월', p:4, h:3, tasks:['단권화 노트 전과목 빠르게 1회독','Ethics 핸드아웃 최종 암기']},
+{w:17, wr:'8/17~8/23', date:'8/18', dow:'화', p:4, h:3, tasks:['오답노트 핵심만 재확인','FSA + FI 핵심 공식 최종 점검']},
+{w:17, wr:'8/17~8/23', date:'8/19', dow:'수', p:4, h:3, tasks:['약점 개념 최종 정리','Ethics Standard 최종 암기 점검']},
+{w:17, wr:'8/17~8/23', date:'8/20', dow:'목', p:4, h:3, tasks:['단권화 노트 가볍게 1회독','계산기 세팅 재확인 (2nd → FORMAT → 9 → ENTER)']},
+{w:17, wr:'8/17~8/23', date:'8/21', dow:'금', p:4, h:0, rest:true, tasks:['🔴 휴식일 — 오늘은 완전히 쉬세요']},
+{w:17, wr:'8/17~8/23', date:'8/22', dow:'토', p:4, h:11, tasks:['단권화 노트 + Ethics 핸드아웃 가볍게 복습 (4h)','오후: 충분한 수면 준비 + 시험장 위치 재확인']},
+{w:17, wr:'8/17~8/23', date:'8/23', dow:'일', p:4, h:3, tasks:['✅ 준비물 확인: 여권·계산기·귀마개·간식·여분 배터리','가벼운 복습만 — 새 내용 절대 NO. 일찍 취침 🌙']},
+// ── 시험일 ──
+{w:18, wr:'8/24 시험일', date:'8/24', dow:'월', p:4, h:0, exam:true, tasks:['🏆 CFA Level 1 시험일!','오전 9시 세션 피하고 오후 세션 추천 (수기 공통 팁)','세션 중간 30분 — 단권화 노트 확인','지금까지의 모든 노력을 믿으세요 💪']},
+];
+
+function renderDailyPlan() {
+  const container = document.getElementById('daily-plan-container');
+  if (!container) return;
+
+  // Group by week
+  const weeks = {};
+  dailyPlan.forEach((d, idx) => {
+    if (!weeks[d.w]) weeks[d.w] = {wr: d.wr, days: []};
+    weeks[d.w].days.push({...d, globalIdx: idx});
+  });
+
+  let html = '';
+  const phaseColors = {1:'#ef4444', 2:'#f59e0b', 3:'#14b8a6', 4:'#3b82f6'};
+  const phaseLabels = {1:'Phase 1', 2:'Phase 2', 3:'Phase 3', 4:'Phase 4'};
+
+  Object.keys(weeks).forEach(wk => {
+    const wkData = weeks[wk];
+    const isExam = wk == 18;
+    const wkLabel = isExam ? '🏆 시험일' : `Week ${wk}`;
+    const phaseSet = [...new Set(wkData.days.map(d => d.p))];
+    const phaseBadges = phaseSet.map(p => `<span style="font-size:10px;padding:1px 6px;border-radius:10px;background:${phaseColors[p]}22;color:${phaseColors[p]};font-weight:600">${phaseLabels[p]}</span>`).join(' ');
+
+    html += `<div class="week-group">
+      <div class="week-header" onclick="toggleWeek(this)">
+        <div class="week-header-left">
+          <span class="week-header-title">${wkLabel} &nbsp; ${wkData.wr}</span>
+          <span>${phaseBadges}</span>
+        </div>
+        <span class="week-header-arrow">▼</span>
+      </div>
+      <div class="week-days">`;
+
+    wkData.days.forEach((d, di) => {
+      const isRest = d.rest;
+      const isExamDay = d.exam;
+      const cardClass = isRest ? 'day-card rest-day' : isExamDay ? 'day-card exam-day' : 'day-card';
+      const dayNum = d.globalIdx + 1;
+      const numBg = isExamDay ? '#14b8a6' : phaseColors[d.p] + '99';
+      const hText = isRest ? '휴식' : isExamDay ? '시험!' : d.h + 'h';
+
+      html += `<div class="${cardClass}">
+        <div class="day-header">
+          <span class="day-num" style="background:${numBg}">D${dayNum}</span>
+          <span class="day-date">${d.date}</span>
+          <span class="day-dow">(${d.dow})</span>
+          <span class="day-hours">${hText}</span>
+        </div>
+        <div class="day-tasks">`;
+
+      d.tasks.forEach((task, ti) => {
+        const key = `daily_${d.date}_${ti}`;
+        const isDone = localStorage.getItem(key) === '1';
+        const doneClass = isDone ? 'day-task done' : 'day-task';
+        const examClass = isExamDay ? ' exam-task' : '';
+        const pip = isExamDay ? '' : `<span class="phase-pip" style="background:${phaseColors[d.p]}"></span>`;
+        if (isExamDay) {
+          html += `<div class="${doneClass}${examClass}"><span class="day-task-text">${task}</span></div>`;
+        } else {
+          html += `<div class="${doneClass}" onclick="toggleDaily('${key}', this)">
+            <div class="dt-box"><span class="dt-tick">✓</span></div>
+            ${pip}
+            <span class="day-task-text">${task}</span>
+          </div>`;
+        }
+      });
+
+      html += `</div></div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  container.innerHTML = html;
+  updateDailyProgress();
+
+  // Auto-open current week
+  const now = new Date();
+  const nowKST = new Date(now.getTime() + 9*3600000);
+  const today = nowKST.toISOString().slice(5,10).replace('-','/');
+  const todayEntry = dailyPlan.find(d => d.date === today);
+  if (todayEntry) {
+    const weekHeaders = document.querySelectorAll('.week-header');
+    const weekIdx = todayEntry.w - 1;
+    if (weekHeaders[weekIdx]) {
+      weekHeaders[weekIdx].classList.add('open');
+      weekHeaders[weekIdx].nextElementSibling.classList.add('open');
+    }
+  } else {
+    // Open week 1 by default
+    const first = document.querySelector('.week-header');
+    if (first) { first.classList.add('open'); first.nextElementSibling.classList.add('open'); }
+  }
+}
+
+function toggleWeek(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+function toggleDaily(key, el) {
+  el.classList.toggle('done');
+  const isDone = el.classList.contains('done');
+  try { localStorage.setItem(key, isDone ? '1' : '0'); } catch(e) {}
+  updateDailyProgress();
+  scheduleGistSave();
+}
+
+function updateDailyProgress() {
+  const allTasks = document.querySelectorAll('#daily-plan-container .day-task:not(.exam-task)');
+  const doneTasks = document.querySelectorAll('#daily-plan-container .day-task.done:not(.exam-task)');
+  const total = allTasks.length;
+  const done = doneTasks.length;
+  const pct = total ? Math.round(done/total*100) : 0;
+  const el_done = document.getElementById('dp-done');
+  const el_total = document.getElementById('dp-total');
+  const el_pct = document.getElementById('dp-pct');
+  const el_bar = document.getElementById('dp-bar');
+  if (el_done) el_done.textContent = done;
+  if (el_total) el_total.textContent = total;
+  if (el_pct) el_pct.textContent = pct + '%';
+  if (el_bar) el_bar.style.width = pct + '%';
+}
+
+function resetDaily() {
+  if (!confirm('일별 계획 체크를 전부 초기화할까요?')) return;
+  dailyPlan.forEach((d, idx) => {
+    d.tasks.forEach((t, ti) => {
+      try { localStorage.removeItem('daily_' + d.date + '_' + ti); } catch(e) {}
+    });
+  });
+  renderDailyPlan();
+}
+
+
+// ===== 공부 기록 트래커 =====
+// dailyPlan 배열에서 날짜 정보를 재활용
+
+function getStudyKey(date) { return 'study_h_' + date; }
+
+function renderTracker() {
+  const container = document.getElementById('tracker-container');
+  if (!container || typeof dailyPlan === 'undefined') return;
+
+  // Group by week
+  const weeks = {};
+  dailyPlan.forEach((d, idx) => {
+    if (!weeks[d.w]) weeks[d.w] = { wr: d.wr, days: [] };
+    weeks[d.w].days.push({ ...d, gIdx: idx });
+  });
+
+  const phColors = {1:'#ef4444',2:'#f59e0b',3:'#14b8a6',4:'#3b82f6'};
+
+  let html = '';
+  Object.keys(weeks).forEach(wk => {
+    const wkData = weeks[wk];
+    const isExam = parseInt(wk) === 18;
+
+    // Calculate weekly target and actual
+    let weekTarget = 0, weekActual = 0;
+    wkData.days.forEach(d => {
+      if (!d.rest && !d.exam) weekTarget += d.h;
+      const saved = parseFloat(localStorage.getItem(getStudyKey(d.date)) || '0');
+      weekActual += saved;
+    });
+    const pct = weekTarget > 0 ? Math.min(100, Math.round(weekActual/weekTarget*100)) : 0;
+    const barColor = pct >= 100 ? '#22c55e' : pct >= 70 ? '#f59e0b' : '#ef4444';
+
+    html += `<div class="tracker-week">
+      <div class="tracker-week-header">
+        <span class="tw-left">${isExam ? '🏆 시험일' : 'Week ' + wk} &nbsp; ${wkData.wr}</span>
+        <div class="tw-right">
+          <span class="tw-actual" id="tw-actual-${wk}">${weekActual.toFixed(1)}h</span>
+          <span class="tw-target">/ 목표 ${weekTarget}h</span>
+          <div class="tw-bar-wrap"><div class="tw-bar-fill" id="tw-bar-${wk}" style="width:${pct}%;background:${barColor}"></div></div>
+          <span style="font-size:11px;font-weight:600;color:${barColor}" id="tw-pct-${wk}">${pct}%</span>
+        </div>
+      </div>`;
+
+    wkData.days.forEach(d => {
+      const saved = parseFloat(localStorage.getItem(getStudyKey(d.date)) || '');
+      const isRest = d.rest;
+      const isExamDay = d.exam;
+      const numBg = phColors[d.p] || '#334155';
+      const dayNum = d.gIdx + 1;
+
+      html += `<div class="tracker-day-row${isRest ? ' rest-row' : ''}">
+        <span class="td-daynum" style="background:${numBg}">D${dayNum}</span>
+        <span class="td-dow">${d.dow}</span>
+        <span class="td-date">${d.date}</span>`;
+
+      if (isExamDay) {
+        html += `<span class="td-label" style="color:var(--teal-dark);font-weight:600">🏆 시험일</span><span></span>`;
+      } else if (isRest) {
+        html += `<span class="td-label td-rest-badge">🔴 휴식일</span><span></span>`;
+      } else {
+        // D-day calculation
+        const examD = new Date('2026-08-24T00:00:00+09:00');
+        const parts = d.date.split('/');
+        const dayD = new Date('2026-' + String(parts[0]).padStart(2,'0') + '-' + String(parts[1]).padStart(2,'0') + 'T00:00:00+09:00');
+        const dday = Math.round((examD - dayD) / 86400000);
+        const ddayStr = dday > 0 ? 'D-' + dday : dday === 0 ? 'D-Day' : 'D+' + Math.abs(dday);
+        const ddayColor = dday <= 14 ? '#ef4444' : dday <= 30 ? '#f59e0b' : '#64748b';
+
+        html += `<span class="td-label" style="display:flex;align-items:center;gap:6px">목표 ${d.h}h <span style="font-size:10px;font-weight:700;color:${ddayColor}">${ddayStr}</span></span>
+          <div class="td-input-wrap">
+            <input type="number" class="td-input" min="0" max="24" step="0.5"
+              value="${saved !== '' && !isNaN(saved) ? saved : ''}"
+              placeholder="0"
+              data-date="${d.date}" data-week="${wk}" data-target="${d.h}"
+              onchange="saveStudyHours(this)"
+              oninput="saveStudyHours(this)">
+            <span class="td-input-unit">h</span>
+          </div>`;
+      }
+      html += `</div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+  updateTrackerSummary();
+}
+
+function saveStudyHours(input) {
+  const date = input.dataset.date;
+  const val = parseFloat(input.value) || 0;
+  try { localStorage.setItem(getStudyKey(date), val); } catch(e) {}
+  updateWeekTotal(input.dataset.week);
+  scheduleGistSave();
+  updateTrackerSummary();
+}
+
+function updateWeekTotal(wk) {
+  if (typeof dailyPlan === 'undefined') return;
+  const wkDays = dailyPlan.filter(d => d.w == wk && !d.rest && !d.exam);
+  let actual = 0, target = 0;
+  wkDays.forEach(d => {
+    target += d.h;
+    actual += parseFloat(localStorage.getItem(getStudyKey(d.date)) || '0');
+  });
+  const pct = target > 0 ? Math.min(100, Math.round(actual/target*100)) : 0;
+  const barColor = pct >= 100 ? '#22c55e' : pct >= 70 ? '#f59e0b' : '#ef4444';
+  const actEl = document.getElementById('tw-actual-' + wk);
+  const barEl = document.getElementById('tw-bar-' + wk);
+  const pctEl = document.getElementById('tw-pct-' + wk);
+  if (actEl) actEl.textContent = actual.toFixed(1) + 'h';
+  if (barEl) { barEl.style.width = pct + '%'; barEl.style.background = barColor; }
+  if (pctEl) { pctEl.textContent = pct + '%'; pctEl.style.color = barColor; }
+}
+
+function updateTrackerSummary() {
+  if (typeof dailyPlan === 'undefined') return;
+  let total = 0, days = 0;
+  const weekTotals = {};
+
+  dailyPlan.forEach(d => {
+    if (d.rest || d.exam) return;
+    const h = parseFloat(localStorage.getItem(getStudyKey(d.date)) || '0');
+    total += h;
+    if (h > 0) days++;
+    if (!weekTotals[d.w]) weekTotals[d.w] = 0;
+    weekTotals[d.w] += h;
+  });
+
+  // This week
+  const nowKST = new Date(Date.now() + 9*3600000);
+  const todayStr = (nowKST.getUTCMonth()+1) + '/' + nowKST.getUTCDate();
+  const todayEntry = dailyPlan.find(d => d.date === todayStr);
+  const thisWeek = todayEntry ? (weekTotals[todayEntry.w] || 0) : 0;
+
+  const weekCount = Object.values(weekTotals).filter(h => h > 0).length;
+  const avg = weekCount > 0 ? total / weekCount : 0;
+
+  const el1 = document.getElementById('ts-total');
+  const el2 = document.getElementById('ts-this-week');
+  const el3 = document.getElementById('ts-avg');
+  const el4 = document.getElementById('ts-days');
+  if (el1) el1.textContent = total.toFixed(1) + 'h';
+  if (el2) el2.textContent = thisWeek.toFixed(1) + 'h';
+  if (el3) el3.textContent = avg.toFixed(1) + 'h';
+  if (el4) el4.textContent = days + '일';
+}
+
+function resetTracker() {
+  if (!confirm('공부 기록을 전부 초기화할까요?')) return;
+  if (typeof dailyPlan === 'undefined') return;
+  dailyPlan.forEach(d => {
+    try { localStorage.removeItem(getStudyKey(d.date)); } catch(e) {}
+  });
+  renderTracker();
+}
+
+function exportStudyData() {
+  if (typeof dailyPlan === 'undefined') return;
+  const data = {};
+  dailyPlan.forEach(d => {
+    const v = localStorage.getItem(getStudyKey(d.date));
+    if (v && parseFloat(v) > 0) data[d.date] = parseFloat(v);
+  });
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'cfa_study_log.json'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importStudyData() {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = '.json';
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        Object.keys(data).forEach(date => {
+          try { localStorage.setItem(getStudyKey(date), data[date]); } catch(err) {}
+        });
+        renderTracker();
+        alert('가져오기 완료!');
+      } catch(err) { alert('파일 형식이 올바르지 않습니다.'); }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+
+// ===== GitHub Gist 동기화 =====
+function openSyncModal() {
+  document.getElementById('gistToken').value = localStorage.getItem('gist_token') || '';
+  document.getElementById('gistId').value = localStorage.getItem('gist_id') || '';
+  document.getElementById('syncModal').classList.add('show');
+}
+function closeSyncModal() {
+  document.getElementById('syncModal').classList.remove('show');
+}
+
+function saveSyncSettings() {
+  const token = document.getElementById('gistToken').value.trim();
+  const gistId = document.getElementById('gistId').value.trim();
+  if (!token || !gistId) { showSyncStatus('토큰과 Gist ID를 모두 입력해주세요.', 'err'); return; }
+  try {
+    localStorage.setItem('gist_token', token);
+    localStorage.setItem('gist_id', gistId);
+  } catch(e) {}
+  showSyncStatus('저장됨. 연결 테스트 중...', 'info');
+  syncFromGist(true);
+}
+
+function getAllData() {
+  const data = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && (key.startsWith('cfa_') || key.startsWith('check_') || key.startsWith('daily_') || key.startsWith('study_h_'))) {
+      data[key] = localStorage.getItem(key);
+    }
+  }
+  return data;
+}
+
+function applyData(data) {
+  Object.keys(data).forEach(key => {
+    try { localStorage.setItem(key, data[key]); } catch(e) {}
+  });
+  loadChecks();
+  if (typeof renderDailyPlan === 'function') renderDailyPlan();
+  if (typeof renderTracker === 'function') renderTracker();
+}
+
+async function syncToGist(silent) {
+  const token = localStorage.getItem('gist_token');
+  const gistId = localStorage.getItem('gist_id');
+  if (!token || !gistId) { if (!silent) showSyncStatus('먼저 설정을 저장해주세요.', 'err'); return; }
+
+  const btn = document.getElementById('syncBtn');
+  if (btn) btn.classList.add('syncing');
+  try {
+    const res = await fetch('https://api.github.com/gists/' + gistId, {
+      method: 'PATCH',
+      headers: { 'Authorization': 'token ' + token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files: { 'cfa_data.json': { content: JSON.stringify(getAllData(), null, 2) } } })
+    });
+    if (res.ok) {
+      if (!silent) showSyncStatus('✅ 서버에 저장 완료!', 'ok');
+    } else {
+      const err = await res.json();
+      showSyncStatus('❌ 오류: ' + (err.message || res.status), 'err');
+    }
+  } catch(e) { showSyncStatus('❌ 네트워크 오류: ' + e.message, 'err'); }
+  if (btn) btn.classList.remove('syncing');
+}
+
+async function syncFromGist(isTest) {
+  const token = localStorage.getItem('gist_token');
+  const gistId = localStorage.getItem('gist_id');
+  if (!token || !gistId) return;
+
+  const btn = document.getElementById('syncBtn');
+  if (btn) btn.classList.add('syncing');
+  try {
+    const res = await fetch('https://api.github.com/gists/' + gistId, {
+      headers: { 'Authorization': 'token ' + token }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const fileContent = data.files['cfa_data.json'] && data.files['cfa_data.json'].content;
+      if (fileContent) {
+        const parsed = JSON.parse(fileContent);
+        if (Object.keys(parsed).length > 0) applyData(parsed);
+      }
+      if (isTest) showSyncStatus('✅ 연결 성공! 이제 어느 기기에서나 자동 동기화됩니다.', 'ok');
+    } else {
+      showSyncStatus('❌ Gist 연결 실패. 토큰/ID를 확인해주세요.', 'err');
+    }
+  } catch(e) { showSyncStatus('❌ 네트워크 오류: ' + e.message, 'err'); }
+  if (btn) btn.classList.remove('syncing');
+}
+
+function showSyncStatus(msg, type) {
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  el.className = 'sync-status sync-' + type;
+  el.textContent = msg;
+}
+
+// Auto-sync on load
+window.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('gist_token') && localStorage.getItem('gist_id')) {
+    syncFromGist(false);
+  }
+});
+
+// Auto-save to Gist on any storage change (debounced 3s)
+let gistSaveTimer = null;
+function scheduleGistSave() {
+  if (!localStorage.getItem('gist_token')) return;
+  clearTimeout(gistSaveTimer);
+  gistSaveTimer = setTimeout(() => syncToGist(true), 3000);
+}
+
+// Patch existing save functions to also trigger Gist sync
+const _origSave = typeof saveChecks === 'function' ? saveChecks : null;
+
+
+function renderTodayTasks() {
+  if (typeof dailyPlan === 'undefined') return;
+
+  // Get today's date in KST (M/D format)
+  const nowKST = new Date(Date.now() + 9 * 3600000);
+  const month = nowKST.getUTCMonth() + 1;
+  const day = nowKST.getUTCDate();
+  const todayStr = month + '/' + day;
+  const dowNames = ['일','월','화','수','목','금','토'];
+  const dowKo = dowNames[nowKST.getUTCDay()];
+
+  // Update date label
+  const dateLabel = document.getElementById('today-date-label');
+  if (dateLabel) {
+    dateLabel.textContent = '2026년 ' + month + '월 ' + day + '일 (' + dowKo + ')';
+  }
+
+  const container = document.getElementById('today-tasks-container');
+  if (!container) return;
+
+  // Find today in dailyPlan
+  const todayEntry = dailyPlan.find(d => d.date === todayStr);
+
+  if (!todayEntry) {
+    // Check if exam passed
+    container.innerHTML = '<div style="color:#f59e0b;font-size:14px;font-weight:600">🏆 시험 기간이 아닙니다.</div>';
+    return;
+  }
+
+  if (todayEntry.rest) {
+    container.innerHTML = `
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:16px 18px;text-align:center">
+        <div style="font-size:24px;margin-bottom:6px">🔴</div>
+        <div style="font-size:16px;font-weight:700;color:#f87171">오늘은 휴식일입니다</div>
+        <div style="font-size:12px;color:#94a3b8;margin-top:4px">충분히 쉬고 내일을 준비하세요</div>
+      </div>`;
+    return;
+  }
+
+  if (todayEntry.exam) {
+    container.innerHTML = `
+      <div style="background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.4);border-radius:8px;padding:16px 18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:6px">🏆</div>
+        <div style="font-size:18px;font-weight:700;color:var(--teal)">오늘이 시험일입니다!</div>
+        <div style="font-size:13px;color:#94a3b8;margin-top:6px">지금까지의 모든 노력을 믿으세요 💪</div>
+      </div>`;
+    return;
+  }
+
+  const phColors = {1:'#ef4444',2:'#f59e0b',3:'#14b8a6',4:'#3b82f6'};
+  const phLabels = {1:'Phase 1',2:'Phase 2',3:'Phase 3',4:'Phase 4'};
+  const color = phColors[todayEntry.p] || '#14b8a6';
+  const dayNum = dailyPlan.indexOf(todayEntry) + 1;
+
+  let tasksHtml = todayEntry.tasks.map((task, ti) => {
+    const key = 'daily_' + todayEntry.date + '_' + ti;
+    const isDone = localStorage.getItem(key) === '1';
+    return `
+      <div onclick="toggleTodayTask('${key}', this, '${todayEntry.date}', ${ti})"
+           style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:8px;cursor:pointer;margin-bottom:6px;
+                  background:${isDone ? 'rgba(20,184,166,.15)' : 'rgba(255,255,255,.06)'};
+                  border:1px solid ${isDone ? 'rgba(20,184,166,.4)' : 'rgba(255,255,255,.1)'};
+                  transition:all .15s">
+        <div style="width:20px;height:20px;border-radius:5px;flex-shrink:0;margin-top:1px;
+                    background:${isDone ? '#14b8a6' : 'transparent'};
+                    border:2px solid ${isDone ? '#14b8a6' : '#475569'};
+                    display:flex;align-items:center;justify-content:center">
+          <span style="color:white;font-size:12px;display:${isDone ? 'block' : 'none'}">✓</span>
+        </div>
+        <span style="font-size:13px;font-weight:500;color:${isDone ? '#64748b' : '#e2e8f0'};
+                     text-decoration:${isDone ? 'line-through' : 'none'};line-height:1.5;flex:1">${task}</span>
+      </div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;background:${color}22;color:${color}">D${dayNum} · ${phLabels[todayEntry.p]}</span>
+      <span style="font-size:11px;color:#64748b">목표 ${todayEntry.h}h</span>
+    </div>
+    ${tasksHtml}`;
+}
+
+function toggleTodayTask(key, el, date, ti) {
+  const isDone = localStorage.getItem(key) === '1';
+  const newDone = !isDone;
+  try { localStorage.setItem(key, newDone ? '1' : '0'); } catch(e) {}
+
+  // Update this card's style
+  el.style.background = newDone ? 'rgba(20,184,166,.15)' : 'rgba(255,255,255,.06)';
+  el.style.borderColor = newDone ? 'rgba(20,184,166,.4)' : 'rgba(255,255,255,.1)';
+  const box = el.querySelector('div');
+  box.style.background = newDone ? '#14b8a6' : 'transparent';
+  box.style.borderColor = newDone ? '#14b8a6' : '#475569';
+  const tick = box.querySelector('span');
+  tick.style.display = newDone ? 'block' : 'none';
+  const text = el.querySelector('span:last-child');
+  text.style.color = newDone ? '#64748b' : '#e2e8f0';
+  text.style.textDecoration = newDone ? 'line-through' : 'none';
+
+  // Sync with daily plan page if open
+  if (typeof updateDailyProgress === 'function') updateDailyProgress();
+  scheduleGistSave();
+}
+
+window.addEventListener('DOMContentLoaded', function() { loadChecks(); renderDailyPlan(); renderTracker(); renderTodayTasks(); });
+
+// Countdown timer
+function updateCountdown() {
+  const exam = new Date('2026-08-24T09:00:00+09:00');
+  const start = new Date('2026-04-28T00:00:00+09:00');
+  const now = new Date();
+  const diff = exam - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '0';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-secs').textContent = '00';
+    return;
+  }
+
+  // 일(日): 한국 자정(KST 00:00) 기준으로 바뀜
+  const nowKST = new Date(now.getTime() + 9 * 3600 * 1000);
+  const todayKST = new Date(Date.UTC(nowKST.getUTCFullYear(), nowKST.getUTCMonth(), nowKST.getUTCDate()));
+  const examDate = new Date(Date.UTC(2026, 7, 24)); // Aug 24, 2026 (월 인덱스 0부터)
+  const days = Math.round((examDate - todayKST) / (1000 * 60 * 60 * 24));
+
+  // 시·분·초: 시험 시작까지 정확하게
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-days').textContent = days;
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+
+  // 진행률 바
+  const total = exam - start;
+  const elapsed = now - start;
+  const pct = Math.min(100, Math.max(0, Math.round((elapsed / total) * 100)));
+  const bar = document.getElementById('progressBar');
+  const pctEl = document.getElementById('progressPct');
+  if (bar) bar.style.width = pct + '%';
+  if (pctEl) pctEl.textContent = pct + '%';
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+<!-- GitHub Gist Sync -->
+<button class="sync-btn" id="syncBtn" onclick="openSyncModal()" title="GitHub 동기화 설정">⚙</button>
+
+<div class="modal-overlay" id="syncModal">
+  <div class="modal-box">
+    <div class="modal-title">☁️ GitHub Gist 동기화 설정</div>
+    <div class="modal-sub">
+      설정하면 어느 기기에서 접속해도 체크리스트·공부기록이 자동으로 동일하게 유지됩니다.<br>
+      아래 <b>설정 방법</b>을 따라 진행해주세요.
+    </div>
+
+    <details style="margin-bottom:16px">
+      <summary style="font-size:12px;font-weight:600;color:var(--teal-dark);cursor:pointer;padding:8px 0">📋 설정 방법 보기</summary>
+      <div style="font-size:11px;color:var(--text2);line-height:1.8;margin-top:10px;padding:12px;background:#f8fafc;border-radius:6px">
+        <b>Step 1.</b> github.com → 로그인 (계정 없으면 무료 가입)<br>
+        <b>Step 2.</b> gist.github.com → 새 Gist 만들기<br>
+        &nbsp;&nbsp;• Filename: <code style="background:#e2e8f0;padding:1px 4px;border-radius:3px">cfa_data.json</code><br>
+        &nbsp;&nbsp;• Content: <code style="background:#e2e8f0;padding:1px 4px;border-radius:3px">{}</code><br>
+        &nbsp;&nbsp;• <b>Create secret gist</b> 클릭<br>
+        &nbsp;&nbsp;• URL에서 Gist ID 복사 (긴 영숫자 문자열)<br>
+        <b>Step 3.</b> github.com/settings/tokens → Generate new token (classic)<br>
+        &nbsp;&nbsp;• <b>gist</b> 항목만 체크 → Generate token → 복사<br>
+        <b>Step 4.</b> 아래 입력란에 붙여넣고 저장
+      </div>
+    </details>
+
+    <div class="modal-field">
+      <label class="modal-label">GitHub 토큰 (ghp_...)</label>
+      <input type="password" class="modal-input" id="gistToken" placeholder="ghp_xxxxxxxxxxxx">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Gist ID (URL의 긴 문자열)</label>
+      <input type="text" class="modal-input" id="gistId" placeholder="abc123def456...">
+    </div>
+    <div id="syncStatus"></div>
+    <div class="modal-btns">
+      <button class="modal-btn-primary" onclick="saveSyncSettings()">저장 + 연결 테스트</button>
+      <button class="modal-btn-cancel" onclick="closeSyncModal()">닫기</button>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="syncFromGist()" style="font-size:11px;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:var(--white);cursor:pointer;color:var(--text2)">☁️ 서버에서 불러오기</button>
+      <button onclick="syncToGist()" style="font-size:11px;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:var(--white);cursor:pointer;color:var(--text2)">💾 서버에 저장</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
