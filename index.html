@@ -269,8 +269,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
 /* Study Tracker */
 .tracker-week { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
-.tracker-week-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--gray-light); border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 8px; }
-.tw-left { font-size: 13px; font-weight: 700; color: var(--text); }
+.tracker-week-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--gray-light); border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 8px; cursor: pointer; user-select: none; }
+.tracker-week-header:hover { background: #e8edf2; }
+.tracker-week-body { display: none; }
+.tracker-week-body.open { display: block; }
+.tracker-week-header .tw-arrow { font-size: 11px; color: var(--text3); transition: transform .2s; margin-left: 4px; }
+.tracker-week-header.open .tw-arrow { transform: rotate(180deg); }
+.tw-left { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
 .tw-right { display: flex; align-items: center; gap: 12px; font-size: 12px; }
 .tw-actual { font-weight: 700; color: var(--teal-dark); }
 .tw-target { color: var(--text3); }
@@ -1701,15 +1706,16 @@ function renderTracker() {
     const barColor = pct >= 100 ? '#22c55e' : pct >= 70 ? '#f59e0b' : '#ef4444';
 
     html += `<div class="tracker-week">
-      <div class="tracker-week-header">
-        <span class="tw-left">${isExam ? '🏆 시험일' : 'Week ' + wk} &nbsp; ${wkData.wr}</span>
+      <div class="tracker-week-header" onclick="toggleTrackerWeek(this)">
+        <span class="tw-left">${isExam ? '🏆 시험일' : 'Week ' + wk} &nbsp; ${wkData.wr} <span class="tw-arrow">▼</span></span>
         <div class="tw-right">
           <span class="tw-actual" id="tw-actual-${wk}">${weekActual.toFixed(1)}h</span>
           <span class="tw-target">/ 목표 ${weekTarget}h</span>
           <div class="tw-bar-wrap"><div class="tw-bar-fill" id="tw-bar-${wk}" style="width:${pct}%;background:${barColor}"></div></div>
           <span style="font-size:11px;font-weight:600;color:${barColor}" id="tw-pct-${wk}">${pct}%</span>
         </div>
-      </div>`;
+      </div>
+      <div class="tracker-week-body">`;
 
     wkData.days.forEach(d => {
       const saved = parseFloat(localStorage.getItem(getStudyKey(d.date)) || '');
@@ -1743,18 +1749,43 @@ function renderTracker() {
               placeholder="0"
               data-date="${d.date}" data-week="${wk}" data-target="${d.h}"
               onchange="saveStudyHours(this)"
-              oninput="saveStudyHours(this)">
+              oninput="saveStudyHours(this)"
+              onclick="event.stopPropagation()">
             <span class="td-input-unit">h</span>
           </div>`;
       }
       html += `</div>`;
     });
 
-    html += `</div>`;
+    html += `</div></div>`;
   });
 
   container.innerHTML = html;
+
+  // Auto-open current week only
+  const nowKST2 = new Date(Date.now() + 9*3600000);
+  const todayStr2 = (nowKST2.getUTCMonth()+1) + '/' + nowKST2.getUTCDate();
+  const todayEntry2 = dailyPlan.find(d => d.date === todayStr2);
+  const currentWk = todayEntry2 ? todayEntry2.w : 1;
+
+  document.querySelectorAll('#tracker-container .tracker-week').forEach(wkEl => {
+    const hdr = wkEl.querySelector('.tracker-week-header');
+    const body = wkEl.querySelector('.tracker-week-body');
+    const pctEl = wkEl.querySelector('[id^="tw-pct-"]');
+    if (!pctEl) return;
+    const wkNum = parseInt(pctEl.id.replace('tw-pct-',''));
+    if (wkNum === currentWk) {
+      hdr.classList.add('open');
+      body.classList.add('open');
+    }
+  });
+
   updateTrackerSummary();
+}
+
+function toggleTrackerWeek(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
 }
 
 function saveStudyHours(input) {
