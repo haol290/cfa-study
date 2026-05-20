@@ -1613,28 +1613,47 @@ function renderDailyPlan() {
   container.innerHTML = html;
   updateDailyProgress();
 
-  // Auto-open current week
-  const now = new Date();
-  const nowKST = new Date(now.getTime() + 9*3600000);
-  const today = nowKST.toISOString().slice(5,10).replace('-','/');
-  const todayEntry = dailyPlan.find(d => d.date === today);
-  if (todayEntry) {
-    const weekHeaders = document.querySelectorAll('.week-header');
-    const weekIdx = todayEntry.w - 1;
-    if (weekHeaders[weekIdx]) {
-      weekHeaders[weekIdx].classList.add('open');
-      weekHeaders[weekIdx].nextElementSibling.classList.add('open');
-    }
+  // Restore saved open weeks, or fall back to current week
+  const savedOpenWeeks = JSON.parse(localStorage.getItem('daily_open_weeks') || 'null');
+  const weekHeaders = document.querySelectorAll('.week-header');
+
+  if (savedOpenWeeks && savedOpenWeeks.length > 0) {
+    weekHeaders.forEach((hdr, idx) => {
+      if (savedOpenWeeks.includes(idx)) {
+        hdr.classList.add('open');
+        hdr.nextElementSibling.classList.add('open');
+      }
+    });
   } else {
-    // Open week 1 by default
-    const first = document.querySelector('.week-header');
-    if (first) { first.classList.add('open'); first.nextElementSibling.classList.add('open'); }
+    const now = new Date();
+    const nowKST = new Date(now.getTime() + 9*3600000);
+    const today = nowKST.toISOString().slice(5,10).replace('-','/');
+    const todayEntry = dailyPlan.find(d => d.date === today);
+    if (todayEntry) {
+      const weekIdx = todayEntry.w - 1;
+      if (weekHeaders[weekIdx]) {
+        weekHeaders[weekIdx].classList.add('open');
+        weekHeaders[weekIdx].nextElementSibling.classList.add('open');
+      }
+    } else {
+      const first = document.querySelector('.week-header');
+      if (first) { first.classList.add('open'); first.nextElementSibling.classList.add('open'); }
+    }
   }
+}
+
+function saveDailyOpenWeeks() {
+  const wkHdrs = document.querySelectorAll('.week-header');
+  const openIdxs = [];
+  wkHdrs.forEach((hdr, idx) => { if (hdr.classList.contains('open')) openIdxs.push(idx); });
+  try { localStorage.setItem('daily_open_weeks', JSON.stringify(openIdxs)); } catch(e) {}
+  scheduleGistSave();
 }
 
 function toggleWeek(header) {
   header.classList.toggle('open');
   header.nextElementSibling.classList.toggle('open');
+  saveDailyOpenWeeks();
 }
 
 function toggleDaily(key, el) {
@@ -1762,30 +1781,50 @@ function renderTracker() {
 
   container.innerHTML = html;
 
-  // Auto-open current week only
-  const nowKST2 = new Date(Date.now() + 9*3600000);
-  const todayStr2 = (nowKST2.getUTCMonth()+1) + '/' + nowKST2.getUTCDate();
-  const todayEntry2 = dailyPlan.find(d => d.date === todayStr2);
-  const currentWk = todayEntry2 ? todayEntry2.w : 1;
+  // Restore saved open weeks, or fall back to current week
+  const savedTrackerWeeks = JSON.parse(localStorage.getItem('tracker_open_weeks') || 'null');
+  const trackerHeaders = document.querySelectorAll('#tracker-container .tracker-week-header');
 
-  document.querySelectorAll('#tracker-container .tracker-week').forEach(wkEl => {
-    const hdr = wkEl.querySelector('.tracker-week-header');
-    const body = wkEl.querySelector('.tracker-week-body');
-    const pctEl = wkEl.querySelector('[id^="tw-pct-"]');
-    if (!pctEl) return;
-    const wkNum = parseInt(pctEl.id.replace('tw-pct-',''));
-    if (wkNum === currentWk) {
-      hdr.classList.add('open');
-      body.classList.add('open');
-    }
-  });
+  if (savedTrackerWeeks && savedTrackerWeeks.length > 0) {
+    trackerHeaders.forEach((hdr, idx) => {
+      if (savedTrackerWeeks.includes(idx)) {
+        hdr.classList.add('open');
+        hdr.nextElementSibling.classList.add('open');
+      }
+    });
+  } else {
+    const nowKST2 = new Date(Date.now() + 9*3600000);
+    const todayStr2 = (nowKST2.getUTCMonth()+1) + '/' + nowKST2.getUTCDate();
+    const todayEntry2 = dailyPlan.find(d => d.date === todayStr2);
+    const currentWk = todayEntry2 ? todayEntry2.w : 1;
+    document.querySelectorAll('#tracker-container .tracker-week').forEach(wkEl => {
+      const hdr = wkEl.querySelector('.tracker-week-header');
+      const body = wkEl.querySelector('.tracker-week-body');
+      const pctEl = wkEl.querySelector('[id^="tw-pct-"]');
+      if (!pctEl) return;
+      const wkNum = parseInt(pctEl.id.replace('tw-pct-',''));
+      if (wkNum === currentWk) {
+        hdr.classList.add('open');
+        body.classList.add('open');
+      }
+    });
+  }
 
   updateTrackerSummary();
+}
+
+function saveTrackerOpenWeeks() {
+  const wkHdrs = document.querySelectorAll('#tracker-container .tracker-week-header');
+  const openIdxs = [];
+  wkHdrs.forEach((hdr, idx) => { if (hdr.classList.contains('open')) openIdxs.push(idx); });
+  try { localStorage.setItem('tracker_open_weeks', JSON.stringify(openIdxs)); } catch(e) {}
+  scheduleGistSave();
 }
 
 function toggleTrackerWeek(header) {
   header.classList.toggle('open');
   header.nextElementSibling.classList.toggle('open');
+  saveTrackerOpenWeeks();
 }
 
 function saveStudyHours(input) {
@@ -1921,7 +1960,7 @@ function getAllData() {
   const data = {};
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key && (key.startsWith('cfa_') || key.startsWith('check_') || key.startsWith('daily_') || key.startsWith('study_h_'))) {
+    if (key && (key.startsWith('cfa_') || key.startsWith('check_') || key.startsWith('daily_') || key.startsWith('study_h_') || key.startsWith('tracker_'))) {
       data[key] = localStorage.getItem(key);
     }
   }
